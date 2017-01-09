@@ -1,0 +1,18 @@
+{
+  "name": "recphyloxml2svg",
+  "version": "0.0.0",
+  "description": "Get a graphical representation from your recphyloXML file.",
+  "main": "test.js",
+  "dependencies": {
+    "minimist": "~1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "nodejs test.js -i examples/genesTree1.xml"
+  },
+  "keywords": [
+    "recphyloXML"
+  ],
+  "author": "GENCE",
+  "license": "BSD-2-Clause"
+}
