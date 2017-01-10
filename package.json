@@ -4,7 +4,9 @@
   "description": "Get a graphical representation from your recphyloXML file.",
   "main": "test.js",
   "dependencies": {
-    "minimist": "~1.2.0"
+    "minimist": "~1.2.0",
+    "xml2js": "~0.4.17",
+    "d3": "~4.4.1"
   },
   "devDependencies": {},
   "scripts": {

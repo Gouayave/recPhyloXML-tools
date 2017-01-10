@@ -1,0 +1,502 @@
+<recGeneTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.recgenetreexml.org" xsi:schemaLocation="http://www.recgenetreexml.org ../../xsd/recGeneTreeXML.xsd">
+  <phylogeny rooted="true">
+    <id>FAM0003</id>
+    <clade>
+      <name>.35</name>
+      <branch_length>0</branch_length>
+      <eventsRec>
+        <speciation speciesLocation="35"/>
+      </eventsRec>
+      <clade>
+        <name>.34.20.3</name>
+        <branch_length>0.471496</branch_length>
+        <eventsRec>
+          <speciationLoss speciesLocation="34"/>
+          <speciationLoss speciesLocation="20"/>
+          <speciation speciesLocation="3"/>
+        </eventsRec>
+        <clade>
+          <name>SYNJB_1_PE950</name>
+          <branch_length>0.0567907</branch_length>
+          <eventsRec>
+            <leaf speciesLocation="SYNJB" geneName="SYNJB_1_PE950"/>
+          </eventsRec>
+        </clade>
+        <clade>
+          <name>SYNJA_1_PE2030</name>
+          <branch_length>0.0454848</branch_length>
+          <eventsRec>
+            <leaf speciesLocation="SYNJA" geneName="SYNJA_1_PE2030"/>
+          </eventsRec>
+        </clade>
+      </clade>
+      <clade>
+        <name>.33</name>
+        <branch_length>0.471496</branch_length>
+        <eventsRec>
+          <speciation speciesLocation="33"/>
+        </eventsRec>
+        <clade>
+          <name>.27.26</name>
+          <branch_length>0.198936</branch_length>
+          <eventsRec>
+            <speciationLoss speciesLocation="27"/>
+            <speciation speciesLocation="26"/>
+          </eventsRec>
+          <clade>
+            <name>CYAP4_1_PE420</name>
+            <branch_length>0.266217</branch_length>
+            <eventsRec>
+              <leaf speciesLocation="CYAP4" geneName="CYAP4_1_PE420"/>
+            </eventsRec>
+          </clade>
+          <clade>
+            <name>T@1|THEEB</name>
+            <branch_length>0.131324</branch_length>
+            <eventsRec>
+              <speciationOut speciesLocation="THEEB" timeSlice="1"/>
+            </eventsRec>
+            <clade>
+              <name>THEEB_1_PE1494</name>
+              <branch_length>0.334417</branch_length>
+              <eventsRec>
+                <leaf speciesLocation="THEEB" geneName="THEEB_1_PE1494"/>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>GLVIO1_1_PE1169@0|GLVIO1</name>
+              <branch_length>0.724426</branch_length>
+              <eventsRec>
+                <transferBack destinationSpecies="GLVIO1" timeSlice="0"/>
+                <leaf speciesLocation="GLVIO1" geneName="GLVIO1_1_PE1169"/>
+              </eventsRec>
+            </clade>
+          </clade>
+        </clade>
+        <clade>
+          <name>.32</name>
+          <branch_length>0.0795774</branch_length>
+          <eventsRec>
+            <speciation speciesLocation="32"/>
+          </eventsRec>
+          <clade>
+            <name>.31</name>
+            <branch_length>0.0665971</branch_length>
+            <eventsRec>
+              <speciation speciesLocation="31"/>
+            </eventsRec>
+            <clade>
+              <name>TRIEI_1_PE668</name>
+              <branch_length>0.263141</branch_length>
+              <eventsRec>
+                <leaf speciesLocation="TRIEI" geneName="TRIEI_1_PE668"/>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>.18</name>
+              <branch_length>0.147972</branch_length>
+              <eventsRec>
+                <speciation speciesLocation="18"/>
+              </eventsRec>
+              <clade>
+                <name>NOSP7_2_PE4607</name>
+                <branch_length>0.0631294</branch_length>
+                <eventsRec>
+                  <leaf speciesLocation="NOSP7" geneName="NOSP7_2_PE4607"/>
+                </eventsRec>
+              </clade>
+              <clade>
+                <name>.6</name>
+                <branch_length>0.0482404</branch_length>
+                <eventsRec>
+                  <speciation speciesLocation="6"/>
+                </eventsRec>
+                <clade>
+                  <name>ANAVT_4_PE931</name>
+                  <branch_length>0.0147708</branch_length>
+                  <eventsRec>
+                    <leaf speciesLocation="ANAVT" geneName="ANAVT_4_PE931"/>
+                  </eventsRec>
+                </clade>
+                <clade>
+                  <name>ANASP_6_PE2969</name>
+                  <branch_length>0.0205304</branch_length>
+                  <eventsRec>
+                    <leaf speciesLocation="ANASP" geneName="ANASP_6_PE2969"/>
+                  </eventsRec>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+          <clade>
+            <name>.30</name>
+            <branch_length>0.0585885</branch_length>
+            <eventsRec>
+              <speciation speciesLocation="30"/>
+            </eventsRec>
+            <clade>
+              <name>ACAM1_1_PE135.T@27|SYNP2@26|ACAM1</name>
+              <branch_length>0.251017</branch_length>
+              <eventsRec>
+                <speciationOutLoss speciesLocation="SYNP2" timeSlice="27"/>
+                <transferBack destinationSpecies="ACAM1" timeSlice="26"/>
+                <leaf speciesLocation="ACAM1" geneName="ACAM1_1_PE135"/>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>.29</name>
+              <branch_length>0.0848267</branch_length>
+              <eventsRec>
+                <speciation speciesLocation="29"/>
+              </eventsRec>
+              <clade>
+                <name>.25</name>
+                <branch_length>0.0613626</branch_length>
+                <eventsRec>
+                  <speciation speciesLocation="25"/>
+                </eventsRec>
+                <clade>
+                  <name>.15</name>
+                  <branch_length>0.054886</branch_length>
+                  <eventsRec>
+                    <speciation speciesLocation="15"/>
+                  </eventsRec>
+                  <clade>
+                    <name>CYAA5_6_PE594</name>
+                    <branch_length>0.221589</branch_length>
+                    <eventsRec>
+                      <leaf speciesLocation="CYAA5" geneName="CYAA5_6_PE594"/>
+                    </eventsRec>
+                  </clade>
+                  <clade>
+                    <name>CYAP8_1_PE2632</name>
+                    <branch_length>0.176689</branch_length>
+                    <eventsRec>
+                      <leaf speciesLocation="CYAP8" geneName="CYAP8_1_PE2632"/>
+                    </eventsRec>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>.24</name>
+                  <branch_length>0.0380066</branch_length>
+                  <eventsRec>
+                    <speciation speciesLocation="24"/>
+                  </eventsRec>
+                  <clade>
+                    <name>CYAP7_1_PE2280</name>
+                    <branch_length>0.17352</branch_length>
+                    <eventsRec>
+                      <leaf speciesLocation="CYAP7" geneName="CYAP7_1_PE2280"/>
+                    </eventsRec>
+                  </clade>
+                  <clade>
+                    <name>MICAN_1_PE2716</name>
+                    <branch_length>0.244643</branch_length>
+                    <eventsRec>
+                      <leaf speciesLocation="MICAN" geneName="MICAN_1_PE2716"/>
+                    </eventsRec>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>T@23|SYNY3</name>
+                <branch_length>0.118545</branch_length>
+                <eventsRec>
+                  <speciationOut speciesLocation="SYNY3" timeSlice="23"/>
+                </eventsRec>
+                <clade>
+                  <name>SYNY3_4_PE2642</name>
+                  <branch_length>0.22923</branch_length>
+                  <eventsRec>
+                    <leaf speciesLocation="SYNY3" geneName="SYNY3_4_PE2642"/>
+                  </eventsRec>
+                </clade>
+                <clade>
+                  <name>Tb@23|23</name>
+                  <branch_length>0.125576</branch_length>
+                  <eventsRec>
+                    <speciationOut speciesLocation="23" timeSlice="23"/>
+                  </eventsRec>
+                  <clade>
+                    <name>@22|1.1</name>
+                    <branch_length>0.280026</branch_length>
+                    <eventsRec>
+                      <transferBack destinationSpecies="1" timeSlice="22"/>
+                      <speciation speciesLocation="1"/>
+                    </eventsRec>
+                    <clade>
+                      <name>SYNE7_1_PE221</name>
+                      <branch_length>0.00291872</branch_length>
+                      <eventsRec>
+                        <leaf speciesLocation="SYNE7" geneName="SYNE7_1_PE221"/>
+                      </eventsRec>
+                    </clade>
+                    <clade>
+                      <name>SYNP6_1_PE1291</name>
+                      <branch_length>0.00296591</branch_length>
+                      <eventsRec>
+                        <leaf speciesLocation="SYNP6" geneName="SYNP6_1_PE1291"/>
+                      </eventsRec>
+                    </clade>
+                  </clade>
+                  <clade>
+                    <name>.23</name>
+                    <branch_length>0.810502</branch_length>
+                    <eventsRec>
+                      <speciation speciesLocation="23"/>
+                    </eventsRec>
+                    <clade>
+                      <name>SYNR3_2_PE944</name>
+                      <branch_length>0.670514</branch_length>
+                      <eventsRec>
+                        <leaf speciesLocation="SYNR3" geneName="SYNR3_2_PE944"/>
+                      </eventsRec>
+                    </clade>
+                    <clade>
+                      <name>T@22|22</name>
+                      <branch_length>0.0960767</branch_length>
+                      <eventsRec>
+                        <speciationOut speciesLocation="22" timeSlice="22"/>
+                      </eventsRec>
+                      <clade>
+                        <name>@18|11.11</name>
+                        <branch_length>0.112066</branch_length>
+                        <eventsRec>
+                          <transferBack destinationSpecies="11" timeSlice="18"/>
+                          <speciation speciesLocation="11"/>
+                        </eventsRec>
+                        <clade>
+                          <name>SYNPW_2_PE774</name>
+                          <branch_length>0.182687</branch_length>
+                          <eventsRec>
+                            <leaf speciesLocation="SYNPW" geneName="SYNPW_2_PE774"/>
+                          </eventsRec>
+                        </clade>
+                        <clade>
+                          <name>SYNS3_1_PE1833</name>
+                          <branch_length>0.162686</branch_length>
+                          <eventsRec>
+                            <leaf speciesLocation="SYNS3" geneName="SYNS3_1_PE1833"/>
+                          </eventsRec>
+                        </clade>
+                      </clade>
+                      <clade>
+                        <name>.22</name>
+                        <branch_length>0.053263</branch_length>
+                        <eventsRec>
+                          <speciation speciesLocation="22"/>
+                        </eventsRec>
+                        <clade>
+                          <name>.19.13</name>
+                          <branch_length>0.133917</branch_length>
+                          <eventsRec>
+                            <speciationLoss speciesLocation="19"/>
+                            <speciation speciesLocation="13"/>
+                          </eventsRec>
+                          <clade>
+                            <name>SYNPX_1_PE1481</name>
+                            <branch_length>0.117437</branch_length>
+                            <eventsRec>
+                              <leaf speciesLocation="SYNPX" geneName="SYNPX_1_PE1481"/>
+                            </eventsRec>
+                          </clade>
+                          <clade>
+                            <name>.12</name>
+                            <branch_length>0.0190145</branch_length>
+                            <eventsRec>
+                              <speciation speciesLocation="12"/>
+                            </eventsRec>
+                            <clade>
+                              <name>SYNSC_1_PE1008</name>
+                              <branch_length>0.161326</branch_length>
+                              <eventsRec>
+                                <leaf speciesLocation="SYNSC" geneName="SYNSC_1_PE1008"/>
+                              </eventsRec>
+                            </clade>
+                            <clade>
+                              <name>SYNS9_1_PE925</name>
+                              <branch_length>0.146404</branch_length>
+                              <eventsRec>
+                                <leaf speciesLocation="SYNS9" geneName="SYNS9_1_PE925"/>
+                              </eventsRec>
+                            </clade>
+                          </clade>
+                        </clade>
+                        <clade>
+                          <name>.21</name>
+                          <branch_length>0.0627178</branch_length>
+                          <eventsRec>
+                            <speciation speciesLocation="21"/>
+                          </eventsRec>
+                          <clade>
+                            <name>.4</name>
+                            <branch_length>0.144436</branch_length>
+                            <eventsRec>
+                              <speciation speciesLocation="4"/>
+                            </eventsRec>
+                            <clade>
+                              <name>PROM3_1_PE1845</name>
+                              <branch_length>0.00426106</branch_length>
+                              <eventsRec>
+                                <leaf speciesLocation="PROM3" geneName="PROM3_1_PE1845"/>
+                              </eventsRec>
+                            </clade>
+                            <clade>
+                              <name>PROMM_1_PE495</name>
+                              <branch_length>0.0101808</branch_length>
+                              <eventsRec>
+                                <leaf speciesLocation="PROMM" geneName="PROMM_1_PE495"/>
+                              </eventsRec>
+                            </clade>
+                          </clade>
+                          <clade>
+                            <name>.17</name>
+                            <branch_length>0.191706</branch_length>
+                            <eventsRec>
+                              <speciation speciesLocation="17"/>
+                            </eventsRec>
+                            <clade>
+                              <name>.16.2</name>
+                              <branch_length>0.37948</branch_length>
+                              <eventsRec>
+                                <speciationLoss speciesLocation="16"/>
+                                <speciation speciesLocation="2"/>
+                              </eventsRec>
+                              <clade>
+                                <name>PROM1_1_PE651</name>
+                                <branch_length>0.00569711</branch_length>
+                                <eventsRec>
+                                  <leaf speciesLocation="PROM1" geneName="PROM1_1_PE651"/>
+                                </eventsRec>
+                              </clade>
+                              <clade>
+                                <name>PROMT_1_PE635</name>
+                                <branch_length>0.0158877</branch_length>
+                                <eventsRec>
+                                  <leaf speciesLocation="PROMT" geneName="PROMT_1_PE635"/>
+                                </eventsRec>
+                              </clade>
+                            </clade>
+                            <clade>
+                              <name>.14</name>
+                              <branch_length>0.0755022</branch_length>
+                              <eventsRec>
+                                <speciation speciesLocation="14"/>
+                              </eventsRec>
+                              <clade>
+                                <name>PRMAR1_1_PE1063</name>
+                                <branch_length>0.316481</branch_length>
+                                <eventsRec>
+                                  <leaf speciesLocation="PRMAR1" geneName="PRMAR1_1_PE1063"/>
+                                </eventsRec>
+                              </clade>
+                              <clade>
+                                <name>T@10|PROM4</name>
+                                <branch_length>0.116101</branch_length>
+                                <eventsRec>
+                                  <speciationOut speciesLocation="PROM4" timeSlice="10"/>
+                                </eventsRec>
+                                <clade>
+                                  <name>PROM4_1_PE1056</name>
+                                  <branch_length>0.246757</branch_length>
+                                  <eventsRec>
+                                    <leaf speciesLocation="PROM4" geneName="PROM4_1_PE1056"/>
+                                  </eventsRec>
+                                </clade>
+                                <clade>
+                                  <name>Tb@10|10</name>
+                                  <branch_length>0.547024</branch_length>
+                                  <eventsRec>
+                                    <speciationOut speciesLocation="10" timeSlice="10"/>
+                                  </eventsRec>
+                                  <clade>
+                                    <name>PROM5_1_PE662@4|PROM5</name>
+                                    <branch_length>0.159894</branch_length>
+                                    <eventsRec>
+                                      <transferBack destinationSpecies="PROM5" timeSlice="4"/>
+                                      <leaf speciesLocation="PROM5" geneName="PROM5_1_PE662"/>
+                                    </eventsRec>
+                                  </clade>
+                                  <clade>
+                                    <name>.10</name>
+                                    <branch_length>0.0655906</branch_length>
+                                    <eventsRec>
+                                      <speciation speciesLocation="10"/>
+                                    </eventsRec>
+                                    <clade>
+                                      <name>PROMP_1_PE651.5</name>
+                                      <branch_length>0.128953</branch_length>
+                                      <eventsRec>
+                                        <speciationLoss speciesLocation="5"/>
+                                        <leaf speciesLocation="PROMP" geneName="PROMP_1_PE651"/>
+                                      </eventsRec>
+                                    </clade>
+                                    <clade>
+                                      <name>.9</name>
+                                      <branch_length>0.0287127</branch_length>
+                                      <eventsRec>
+                                        <speciation speciesLocation="9"/>
+                                      </eventsRec>
+                                      <clade>
+                                        <name>PROM9_1_PE623</name>
+                                        <branch_length>0.0631102</branch_length>
+                                        <eventsRec>
+                                          <leaf speciesLocation="PROM9" geneName="PROM9_1_PE623"/>
+                                        </eventsRec>
+                                      </clade>
+                                      <clade>
+                                        <name>.8.7</name>
+                                        <branch_length>0.0223265</branch_length>
+                                        <eventsRec>
+                                          <speciationLoss speciesLocation="8"/>
+                                          <speciation speciesLocation="7"/>
+                                        </eventsRec>
+                                        <clade>
+                                          <name>PROMS_1_PE651</name>
+                                          <branch_length>0.00945917</branch_length>
+                                          <eventsRec>
+                                            <leaf speciesLocation="PROMS" geneName="PROMS_1_PE651"/>
+                                          </eventsRec>
+                                        </clade>
+                                        <clade>
+                                          <name>T@1|PROM0</name>
+                                          <branch_length>0.00690004</branch_length>
+                                          <eventsRec>
+                                            <speciationOut speciesLocation="PROM0" timeSlice="1"/>
+                                          </eventsRec>
+                                          <clade>
+                                            <name>PROM0_1_PE623</name>
+                                            <branch_length>0.0104173</branch_length>
+                                            <eventsRec>
+                                              <leaf speciesLocation="PROM0" geneName="PROM0_1_PE623"/>
+                                            </eventsRec>
+                                          </clade>
+                                          <clade>
+                                            <name>PROM2_1_PE676@0|PROM2</name>
+                                            <branch_length>0.0280294</branch_length>
+                                            <eventsRec>
+                                              <transferBack destinationSpecies="PROM2" timeSlice="0"/>
+                                              <leaf speciesLocation="PROM2" geneName="PROM2_1_PE676"/>
+                                            </eventsRec>
+                                          </clade>
+                                        </clade>
+                                      </clade>
+                                    </clade>
+                                  </clade>
+                                </clade>
+                              </clade>
+                            </clade>
+                          </clade>
+                        </clade>
+                      </clade>
+                    </clade>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+        </clade>
+      </clade>
+    </clade>
+  </phylogeny>
+</recGeneTree>
