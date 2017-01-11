@@ -1,1 +1,4 @@
+sudo apt-get update
+sudo apt-get install npm
+npm install
 node index.js -i examples/genesTree1.xml -o examples/gt1.svg
