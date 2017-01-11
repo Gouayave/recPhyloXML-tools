@@ -11,7 +11,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node index.js -i examples/genesTree1.xml -o examples/gt1.svg"
+    "test": "node index.js -i examples/genesTree1.xml -o examples/gt1.svg",
+    "archive": "git archive --format=tar --prefix=rpXML-visu/ HEAD | gzip > rpXML-visu.tar.gz"
   },
   "keywords": [
     "recphyloXML"

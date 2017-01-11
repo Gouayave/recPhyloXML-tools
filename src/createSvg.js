@@ -145,7 +145,7 @@ function createSVG(svg,cladeRoot) {
     top: 40,
     down: 20,
     left: 200,
-    right: 300
+    right: 50
   }
 
   nodeWidth = 30;

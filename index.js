@@ -16,7 +16,7 @@ var ofileUrl = argv.o;
 exploseTree.exploseTree(ifileUrl,function(err,explosedTree) {
 
 
-    var svg = d3.select(document.body).append("svg").append("g").attr("id","main");
+    var svg = d3.select(document.body).append("svg");
     var cladeRoot = explosedTree;
 
     createSVG.createSVG(svg,cladeRoot);
