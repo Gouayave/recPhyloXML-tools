@@ -13,6 +13,14 @@
         <eventsRec>
           <speciationLoss speciesLocation="34"/>
           <speciationLoss speciesLocation="20"/>
+          <speciationLoss speciesLocation="20"/>
+          <speciationLoss speciesLocation="20"/>
+          <speciationLoss speciesLocation="20"/>
+          <speciationLoss speciesLocation="20"/>
+          <speciationLoss speciesLocation="20"/>
+          <speciationLoss speciesLocation="20"/>
+          <speciationLoss speciesLocation="20"/>
+          <speciationLoss speciesLocation="20"/>
           <speciation speciesLocation="3"/>
         </eventsRec>
         <clade>
@@ -102,6 +110,7 @@
                 <name>NOSP7_2_PE4607</name>
                 <branch_length>0.0631294</branch_length>
                 <eventsRec>
+                  <transferBack destinationSpecies="E"></transferBack>
                   <leaf speciesLocation="NOSP7" geneName="NOSP7_2_PE4607"/>
                 </eventsRec>
               </clade>
@@ -109,7 +118,9 @@
                 <name>.6</name>
                 <branch_length>0.0482404</branch_length>
                 <eventsRec>
-                  <speciation speciesLocation="6"/>
+                  <speciationOutLoss speciesLocation="B"></speciationOutLoss>
+                  <transferBack destinationSpecies="E"></transferBack>
+                  <duplication speciesLocation="E"></duplication>
                 </eventsRec>
                 <clade>
                   <name>ANAVT_4_PE931</name>
@@ -122,6 +133,14 @@
                   <name>ANASP_6_PE2969</name>
                   <branch_length>0.0205304</branch_length>
                   <eventsRec>
+                    <speciationLoss speciesLocation="20"/>
+                    <speciationLoss speciesLocation="20"/>
+                    <speciationLoss speciesLocation="20"/>
+                    <speciationLoss speciesLocation="20"/>
+                    <speciationLoss speciesLocation="20"/>
+                    <speciationLoss speciesLocation="20"/>
+                    <speciationLoss speciesLocation="20"/>
+                    <speciationLoss speciesLocation="20"/>
                     <leaf speciesLocation="ANASP" geneName="ANASP_6_PE2969"/>
                   </eventsRec>
                 </clade>

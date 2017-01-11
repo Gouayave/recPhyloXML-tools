@@ -4,13 +4,14 @@
   "description": "Get a graphical representation from your recphyloXML file.",
   "main": "test.js",
   "dependencies": {
+    "d3": "~4.4.1",
     "minimist": "~1.2.0",
-    "xml2js": "~0.4.17",
-    "d3": "~4.4.1"
+    "node-jsdom": "^3.1.5",
+    "xml2js": "~0.4.17"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "nodejs test.js -i examples/genesTree1.xml"
+    "test": "node index.js -i examples/genesTree1.xml -o examples/gt1.svg"
   },
   "keywords": [
     "recphyloXML"
