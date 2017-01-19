@@ -132,8 +132,6 @@ d3.layout.radial = function () {
 }
 
 
-
-
 function createSVG(svg,cladeRoot) {
 
   var g = svg.append("g");
@@ -228,7 +226,12 @@ function createSVG(svg,cladeRoot) {
           return "#0e2e2e";
         }
       })
-      .attr("d", diagonal);
+      .attr("d", diagonal)
+      .attr('stroke-dasharray',function(d){
+            var et = d.target.data.event.eventType;
+            if(et === "transferBack" || et === "bifurcationOut")
+                return '5,5';
+        });
 
 
 
@@ -422,7 +425,7 @@ function createSVG(svg,cladeRoot) {
       .text(function(d) {
         var name = "";
         if (d.data.name && d.data.event.eventType === "leaf") {
-          name += d.data.event.geneName;
+          name += (d.data.name || d.data.event.geneName);
         }
         if (d.data.event.speciesLocation) {
           name += " (" + d.data.event.speciesLocation + ")";

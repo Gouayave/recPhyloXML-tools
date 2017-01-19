@@ -7,12 +7,12 @@
     "d3": "~4.4.1",
     "minimist": "~1.2.0",
     "node-jsdom": "^3.1.5",
-    "xml2js": "~0.4.17"
+    "xml-digester": "0.0.5"
   },
   "devDependencies": {},
   "scripts": {
     "test": "node index.js -i examples/genesTree1.xml -o examples/gt1.svg",
-    "archive": "git archive --format=tar --prefix=rpXML-visu/ HEAD | gzip > rpXML-visu.tar.gz"
+    "archive": "cd .. ; tar zcvf rpXML-visu.tar.gz --exclude='.git' --exclude='./assets' --exclude='.gitignore' rpXML-visu-cmd"
   },
   "keywords": [
     "recphyloXML"

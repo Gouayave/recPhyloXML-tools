@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--                                                               -->
+<!--  Example of recGeneTree file                                       -->
+<!--                                                               -->
+<!--  Last modified: 18/11/2015 by Guillaume GENCE                 -->
+<recGeneTree
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.recgenetreexml.org"
+  xsi:schemaLocation="http://www.recgenetreexml.org ../../xsd/recGeneTreeXML.xsd">
+  <phylogeny rooted="true">
+    <clade>
+      <name>1</name>
+      <eventsRec>
+        <speciation speciesLocation="D"></speciation>
+      </eventsRec>
+      <clade>
+        <name>2</name>
+        <eventsRec>
+          <speciation speciesLocation="C"></speciation>
+        </eventsRec>
+        <clade>
+          <name>3</name>
+          <eventsRec>
+            <leaf speciesLocation="A"></leaf>
+          </eventsRec>
+        </clade>
+        <clade>
+          <name>4</name>
+          <eventsRec>
+            <leaf speciesLocation="B"></leaf>
+          </eventsRec>
+        </clade>
+      </clade>
+      <clade>
+        <name>5</name>
+        <eventsRec>
+          <speciationOut speciesLocation="E"></speciationOut>
+        </eventsRec>
+        <clade>
+          <name>6</name>
+          <eventsRec>
+            <bifurcationOut></bifurcationOut>
+          </eventsRec>
+          <clade>
+            <name>7</name>
+            <eventsRec>
+              <transferBack destinationSpecies="B"></transferBack>
+              <leaf speciesLocation="B"></leaf>
+            </eventsRec>
+          </clade>
+          <clade>
+            <name>8</name>
+            <eventsRec>
+              <transferBack destinationSpecies="E"></transferBack>
+              <leaf speciesLocation="E"></leaf>
+            </eventsRec>
+          </clade>
+        </clade>
+        <clade>
+          <name>9</name>
+          <eventsRec>
+            <leaf speciesLocation="E"></leaf>
+          </eventsRec>
+        </clade>
+      </clade>
+    </clade>
+  </phylogeny>
+</recGeneTree>

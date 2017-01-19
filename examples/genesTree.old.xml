@@ -215,7 +215,7 @@
                   <name>Tb@23|23</name>
                   <branch_length>0.125576</branch_length>
                   <eventsRec>
-                    <bifurcationOut speciesLocation="23" timeSlice="23"/>
+                    <speciationOut speciesLocation="23" timeSlice="23"/>
                   </eventsRec>
                   <clade>
                     <name>@22|1.1</name>
@@ -243,7 +243,6 @@
                     <name>.23</name>
                     <branch_length>0.810502</branch_length>
                     <eventsRec>
-                      <transferBack destinationSpecies="23"></transferBack>
                       <speciation speciesLocation="23"/>
                     </eventsRec>
                     <clade>
@@ -408,7 +407,7 @@
                                   <name>Tb@10|10</name>
                                   <branch_length>0.547024</branch_length>
                                   <eventsRec>
-                                    <bifurcationOut speciesLocation="10" timeSlice="10"/>
+                                    <speciationOut speciesLocation="10" timeSlice="10"/>
                                   </eventsRec>
                                   <clade>
                                     <name>PROM5_1_PE662@4|PROM5</name>
@@ -422,7 +421,6 @@
                                     <name>.10</name>
                                     <branch_length>0.0655906</branch_length>
                                     <eventsRec>
-                                      <transferBack destinationSpecies="10"/>
                                       <speciation speciesLocation="10"/>
                                     </eventsRec>
                                     <clade>
