@@ -295,25 +295,25 @@ function createSVG(svg,cladeRoot) {
       .attr("fill", function(d) {
         switch (d.data.event.eventType) {
           case "speciation":
-            return color(1)
+            return "#fdc747"
             break;
           case "speciationOutLoss":
-            return color(2)
+            return "#1f9dea"
             break;
           case "speciationOut":
-            return color(2)
+            return "#1f9dea"
             break;
           case "bifurcationOut":
             return "black"
             break;
           case "transferBack":
-            return color(3)
+            return "#1c8116"
             break;
           case "duplication":
-            return color(4)
+            return "#d46e52"
             break;
           case "speciationLoss":
-            return color(1)
+            return "#fdc747"
             break;
           case "leaf":
             if (d.data.loss) {
@@ -327,7 +327,7 @@ function createSVG(svg,cladeRoot) {
               }
             }
             else {
-              return color(5);
+              return "#63cf95";
             }
             break;
           default:
@@ -378,31 +378,31 @@ function createSVG(svg,cladeRoot) {
       .attr("stroke", function(d) {
         switch (d.data.event.eventType) {
           case "speciation":
-            return color(1)
+            return "#fdc747"
             break;
           case "speciationOutLoss":
-            return color(2)
+            return "#1f9dea"
             break;
           case "speciationOut":
-            return color(2)
+            return "#1f9dea"
             break;
           case "bifurcationOut":
             return "black"
             break;
           case "transferBack":
-            return color(3)
+            return "#1c8116"
             break;
           case "duplication":
-            return color(4)
+            return "#d46e52"
             break;
           case "speciationLoss":
-            return color(1)
+            return "#fdc747"
             break;
           case "leaf":
             if (d.data.loss) {
               return "black";
             } else {
-              return color(5);
+              return "#63cf95";
             }
             break;
           default:
