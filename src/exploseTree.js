@@ -1,12 +1,12 @@
 var exports = module.exports = {};
 
-cladeUtil = require('./cladeUtil.js');
-flatEvents = require('./flatEvents');
-rpXMLtorpJSON = require('./rpXMLtorpJSON');
+var cladeUtil = require('./cladeUtil.js');
+var flatEvents = require('./flatEvents');
+var rpXMLtorpJSON = require('./rpXMLtorpJSON.js');
 
 
-function exploseTree (path,callback) {
-  rpXMLtorpJSON.rpXMLFile2rpJSON(path,function (err,result) {
+function exploseTree (xml,callback) {
+  rpXMLtorpJSON.rpXMLString2rpJSON(xml,function (err,result) {
     var cladeRoot = result.recGeneTree.phylogeny.clade;
     var explosedTreeRoot = flatEvents.traverseTree(cladeRoot);
     callback(err,explosedTreeRoot);

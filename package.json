@@ -2,16 +2,16 @@
   "name": "recphyloxml2svg",
   "version": "0.0.0",
   "description": "Get a graphical representation from your recphyloXML file.",
-  "main": "test.js",
+  "main": "index.js",
   "dependencies": {
     "d3": "~4.4.1",
-    "minimist": "~1.2.0",
-    "node-jsdom": "^3.1.5",
+    "domv": "^4.2.0",
+    "minimist": "^1.2.0",
     "xml-digester": "0.0.5"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node index.js -i examples/genesTree1.xml -o examples/gt1.svg",
+    "start": "node index.js -i examples/genesTree1.xml -o ./gt1.svg",
     "archive": "cd .. ; tar zcvf rpXML-visu.tar.gz --exclude='.git' --exclude='./assets' --exclude='.gitignore' rpXML-visu-cmd"
   },
   "keywords": [

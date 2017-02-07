@@ -18,10 +18,10 @@ function rpXMLFile2rpJSON(path,callback) {
 
 }
 
-function rpXMLString2rpJSON(xmlstr) {
+function rpXMLString2rpJSON(xmlstr,callback) {
   digester.digest(xmlstr, callback);
 }
 
-
+//
 exports.rpXMLFile2rpJSON = rpXMLFile2rpJSON;
 exports.rpXMLString2rpJSON = rpXMLString2rpJSON;

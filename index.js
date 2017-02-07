@@ -1,6 +1,7 @@
 var fs = require('fs');
 var d3 = require('d3');
-document = require('node-jsdom').jsdom();
+var domv = require('domv');
+var document = domv.createHtmlDomDocument();
 var exploseTree = require('./src/exploseTree.js');
 var createSVG = require('./src/createSvg.js');
 //Test
