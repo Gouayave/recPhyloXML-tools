@@ -1,5 +1,0 @@
-rpXML-visu use node.js to interprate Javascript file so you have to install it:
-https://nodejs.org/en/download/
-
-You can generate your SVG file using this command:
-nodejs index.js -i examples/genesTree1.xml -o examples/gt1.svg
