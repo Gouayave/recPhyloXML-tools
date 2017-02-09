@@ -1,39 +1,7 @@
 var exports = module.exports = {};
-exports.parse = parse;
+exports.flatTree = flatTree;
 
-var xml_digester = require("xml-digester");
 var d3hierarchy = require('d3-hierarchy');
-var handler = new xml_digester.OrderedElementsHandler("eventType");
-var options = {
-  "handler": [{
-    "path": "eventsRec/*",
-    "handler": handler
-  }]
-};
-var digester = xml_digester.XmlDigester(options);
-
-function parse(xmlstr,callback) {
-  //Silent
-  var cl = console.log;
-  console.log = function (str) {};
-  digester.digest(xmlstr, function (err,recTree) {
-    //Talk
-    console.log = cl;
-
-    //We want array for recGeneTrees
-    if(recTree.recPhylo)
-    {
-      var recGeneTrees = recTree.recPhylo.recGeneTree;
-      if( !recGeneTrees.length){
-        recTree.recPhylo.recGeneTree = [recGeneTrees];
-      }
-    }
-
-    callback(err,recTree);
-  });
-}
-
-
 
 function createNewSubTreeWithChild(nodeName,nodeEvent,childName,childEvent) {
   return {
