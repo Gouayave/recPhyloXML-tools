@@ -50,21 +50,13 @@ function flatTree(treeRoot) {
               break;
 
             default:
-              child.data.eventsRec = newEvent;
+              child.data.eventsRec = [newEvent];
 
           }
         }
       });
     }
   });
-
-  // treeRootNode = d3hierarchy.hierarchy(treeRoot,function(d) {
-  //   return d.clade;
-  // });
-  // treeRootNode.each(function (node) {
-  //   console.log(node.data);
-  //   console.log("--");
-  // })
   return treeRoot;
 }
 
@@ -75,7 +67,7 @@ function createNewSubTreeWithChild(nodeName,nodeEvent,childName,childSpeciesLoca
     clade : [
       {
         name: childName,
-        eventsRec : [{eventType: 'leaf' , speciesLocation: childSpeciesLocation}]
+        eventsRec : [{eventType: 'loss' , speciesLocation: childSpeciesLocation}]
       }
     ]
   }

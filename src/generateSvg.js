@@ -1,5 +1,6 @@
 var exports = module.exports = {};
-exports.createSVG = createSVG;
+exports.generateSVG = generateSVG;
+
 var d3 = require('d3');
 d3.layout = {};
 
@@ -132,7 +133,7 @@ d3.layout.radial = function () {
 }
 
 
-function createSVG(svg,cladeRoot) {
+function generateSVG(svg,cladeRoot) {
 
   var g = svg.append("g");
 
@@ -159,6 +160,11 @@ function createSVG(svg,cladeRoot) {
   function updateLayout(cRoot) {
     var treeRoot = d3.hierarchy(cRoot, function(d) {
       return d.clade;
+    });
+
+    treeRoot.each(function (d) {
+      var eventsRec = d.data.eventsRec;
+      d.data.lastEvent = eventsRec[eventsRec.length - 1];
     });
 
     layout.nodeSize([nodeWidth, nodeHeigth]);
@@ -228,8 +234,9 @@ function createSVG(svg,cladeRoot) {
       })
       .attr("d", diagonal)
       .attr('stroke-dasharray',function(d){
-            var et = d.target.data.event.eventType;
-            if(et === "transferBack" || et === "bifurcationOut")
+            var et = d.target.data.lastEvent.eventType;
+            var sl = d.target.data.lastEvent.speciesLocation;
+            if(et === "transferBack" || et === "bifurcationOut" || sl == "Out")
                 return '5,5';
         });
 
@@ -279,10 +286,10 @@ function createSVG(svg,cladeRoot) {
       .select(".gsymbol")
       .attr("transform", function(d) {
         var str = "";
-        if (d.data.loss) {
+        if (d.data.lastEvent.eventType === "loss") {
           str += "rotate(45)";
         }
-        if (d.data.event.eventType === "leaf") {
+        if (d.data.lastEvent.eventType === "leaf") {
           str += "rotate(90)";
         } else {
           str += "";
@@ -293,7 +300,7 @@ function createSVG(svg,cladeRoot) {
     allNodes
       .select(".symbol")
       .attr("fill", function(d) {
-        switch (d.data.event.eventType) {
+        switch (d.data.lastEvent.eventType) {
           case "speciation":
             return "#fdc747"
             break;
@@ -316,26 +323,17 @@ function createSVG(svg,cladeRoot) {
             return "#fdc747"
             break;
           case "leaf":
-            if (d.data.loss) {
-
-              if(d.data.deadSpecies)
-              {
-                return "white"
-              }
-              else {
-                return "black";
-              }
-            }
-            else {
-              return "#63cf95";
-            }
+            return "#63cf95";
+            break;
+          case "loss":
+            return "black";
             break;
           default:
 
         }
       })
       .attr("d", function(d) {
-        switch (d.data.event.eventType) {
+        switch (d.data.lastEvent.eventType) {
           case "speciation":
             return symbol.type(d3.symbolCircle)()
             break;
@@ -358,13 +356,10 @@ function createSVG(svg,cladeRoot) {
             return symbol.type(d3.symbolCircle)()
             break;
           case "leaf":
-            if (d.data.loss) {
-              return symbol.type(d3.symbolCross)()
-            } else {
-              return symbol.type(d3.symbolTriangle)()
-            }
-
+            return symbol.type(d3.symbolTriangle)()
             break;
+          case "loss":
+            return symbol.type(d3.symbolCross)()
           default:
 
         }
@@ -376,7 +371,7 @@ function createSVG(svg,cladeRoot) {
       .attr("fill", "white")
       .attr("stroke-width", "2px")
       .attr("stroke", function(d) {
-        switch (d.data.event.eventType) {
+        switch (d.data.lastEvent.eventType) {
           case "speciation":
             return "#fdc747"
             break;
@@ -399,11 +394,10 @@ function createSVG(svg,cladeRoot) {
             return "#fdc747"
             break;
           case "leaf":
-            if (d.data.loss) {
-              return "black";
-            } else {
               return "#63cf95";
-            }
+            break;
+          case "loss":
+              return "black";
             break;
           default:
 
@@ -424,14 +418,14 @@ function createSVG(svg,cladeRoot) {
       })
       .text(function(d) {
         var name = "";
-        if (d.data.name && d.data.event.eventType === "leaf") {
-          name += (d.data.name || d.data.event.geneName);
+        if (d.data.name && d.data.lastEvent.eventType === "leaf") {
+          name += (d.data.name || d.data.lastEvent.geneName);
         }
-        if (d.data.event.speciesLocation) {
-          name += " (" + d.data.event.speciesLocation + ")";
+        if (d.data.lastEvent.speciesLocation) {
+          name += " (" + d.data.lastEvent.speciesLocation + ")";
         }
-        if (d.data.event.destinationSpecies) {
-          name += " ( -> " + d.data.event.destinationSpecies + ")";
+        if (d.data.lastEvent.destinationSpecies) {
+          name += " ( -> " + d.data.lastEvent.destinationSpecies + ")";
         }
         return name;
       });
