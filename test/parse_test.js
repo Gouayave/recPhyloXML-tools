@@ -1,22 +1,24 @@
-var parse = require('../modules/parse.js');
-var flatTree = require('../modules/flatTree.js');
-var generateSVG = require('../modules/generateSvg.js');
+var parse = require('../src/parse.js');
+var flatTree = require('../src/flatTree.js');
+var generateSVG = require('../src/generateSvg.js');
+var d3 = require('d3');
+
+
 var fs = require('fs');
 var assert = require('assert');
 var domv = require('domv');
-var d3 = require('d3');
 
-var pathRecGeneTree = "examples/example_3.xml"
-var pathRecPhylo = "examples/rpexample_1.xml"
 
-var xmlStrRecGeneTree = fs.readFileSync(pathRecGeneTree, 'utf8');
+
+var pathRecPhylo = "/home/gence/testDTLB2"
+
 var xmlStrRecPhylo = fs.readFileSync(pathRecPhylo, 'utf8');
 
 
-parse.parse(xmlStrRecGeneTree, function (err,recTree) {
+parse.parse(xmlStrRecPhylo, function (err,recTree) {
   var document = domv.createHtmlDomDocument();
-  assert(recTree.recGeneTree.phylogeny);
-  var cladeRoot = recTree.recGeneTree.phylogeny.clade;
+  assert(recTree.recPhylo.recGeneTree[0].phylogeny);
+  var cladeRoot = recTree.recPhylo.recGeneTree[0].phylogeny.clade;
   flatTree.flatTree(cladeRoot);
 
 

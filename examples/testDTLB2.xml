@@ -1,0 +1,23 @@
+<recGeneTree>
+  <phylogeny rooted="true">
+    <clade>
+      <name>-1</name>
+      <eventsRec>
+        <transferBack destinationSpecies="1"></transferBack>
+        <duplication speciesLocation="1"></duplication>
+      </eventsRec>
+      <clade>
+        <name>1_1</name>
+        <eventsRec>
+          <leaf speciesLocation="1"></leaf>
+        </eventsRec>
+      </clade>
+      <clade>
+        <name>1_2</name>
+        <eventsRec>
+          <leaf speciesLocation="1"></leaf>
+        </eventsRec>
+      </clade>
+    </clade>
+  </phylogeny>
+</recGeneTree>

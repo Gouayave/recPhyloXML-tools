@@ -29,6 +29,14 @@ function parse(xmlstr,callback) {
       }
     }
 
+    //We always want recPhylo
+    if(recTree.recGeneTree)
+    {
+      recTree.recPhylo = {};
+      recTree.recPhylo.recGeneTree = [recTree.recGeneTree];
+      delete recTree.recGeneTree;
+    }
+
     callback(err,recTree);
   });
 }
