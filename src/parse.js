@@ -19,7 +19,6 @@ function parse(xmlstr,callback) {
   digester.digest(xmlstr, function (err,recTree) {
     //Talk
     console.log = cl;
-
     //We want array for recGeneTrees
     if(recTree.recPhylo)
     {

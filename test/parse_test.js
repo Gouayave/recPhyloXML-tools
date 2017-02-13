@@ -11,7 +11,7 @@ var domv = require('domv');
 
 
 
-var pathRecPhylo = "/home/gence/Projets/rpXML-visu-cmd/examples/rpRef.xml"
+var pathRecPhylo = "/home/gence/Projets/rpXML-visu-cmd/examples/bob.xml"
 var xmlStrRecPhylo = fs.readFileSync(pathRecPhylo, 'utf8');
 
 var flatTreeConfig = {
@@ -22,8 +22,9 @@ parse.parse(xmlStrRecPhylo, function (err,recTree) {
   var document = domv.createHtmlDomDocument();
   assert(recTree.recPhylo.recGeneTree[0].phylogeny);
   var cladeRootGt = recTree.recPhylo.recGeneTree[0].phylogeny.clade;
-  flatTree.flatTree(cladeRootGt,flatTreeConfig);
-  
+  cladeRootGt = flatTree.flatTree(cladeRootGt,flatTreeConfig);
+
+
   if(recTree.recPhylo.spTree)
   {
     var cladeRootSt = recTree.recPhylo.spTree.phylogeny.clade;

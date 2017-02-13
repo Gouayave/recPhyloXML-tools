@@ -10,8 +10,14 @@ var defaultConfig = {
 }
 
 function flatTree(treeRoot,config = {}) {
+  
+  var virtualRoot = {
+    name : "Out",
+    eventsRec : treeRoot.eventsRec,
+    clade : [treeRoot]
+  }
 
-  treeRootNode = d3hierarchy.hierarchy(treeRoot,function(d) {
+  treeRootNode = d3hierarchy.hierarchy(virtualRoot,function(d) {
     return d.clade;
   });
 
@@ -81,7 +87,9 @@ function flatTree(treeRoot,config = {}) {
       });
     }
   });
-  return treeRoot;
+
+
+  return virtualRoot.clade[0];
 }
 
 function createNewSubTreeWithChild(nodeName,nodeEvent,childName,childSpeciesLocation) {
