@@ -4,8 +4,9 @@ rpXML = {};
 rpXML.parse = require('./src/parse.js').parse;
 rpXML.flatTree = require('./src/flatTree.js').flatTree;
 rpXML.generateSVG  = require('./src/generateSvg.js').generateSVG;
+rpXML.reconcile  = require('./src/reconcile.js').reconcile;
 
-},{"./src/flatTree.js":6,"./src/generateSvg.js":7,"./src/parse.js":8}],2:[function(require,module,exports){
+},{"./src/flatTree.js":6,"./src/generateSvg.js":7,"./src/parse.js":8,"./src/reconcile.js":9}],2:[function(require,module,exports){
 // https://d3js.org/d3-hierarchy/ Version 1.1.1. Copyright 2017 Mike Bostock.
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
@@ -19276,7 +19277,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 })(typeof exports === 'undefined' ? this.sax = {} : exports)
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":10,"stream":32,"string_decoder":33}],5:[function(require,module,exports){
+},{"buffer":11,"stream":33,"string_decoder":34}],5:[function(require,module,exports){
 var sax;
 
 // wrapper for non-node envs
@@ -19670,16 +19671,27 @@ var sax;
 
 })(typeof exports === "undefined" ? sax = {} : exports);
 
-},{"sax":4,"util":35}],6:[function(require,module,exports){
+},{"sax":4,"util":36}],6:[function(require,module,exports){
 var exports = module.exports = {};
 exports.flatTree = flatTree;
 
 var d3hierarchy = require('d3-hierarchy');
 
+var defaultConfig = {
+  transferBack : true,
+  speciationLoss : true,
+  speciationOutLoss : true,
+}
 
-function flatTree(treeRoot) {
+function flatTree(treeRoot,config = {}) {
+  
+  var virtualRoot = {
+    name : "Out",
+    eventsRec : treeRoot.eventsRec,
+    clade : [treeRoot]
+  }
 
-  treeRootNode = d3hierarchy.hierarchy(treeRoot,function(d) {
+  treeRootNode = d3hierarchy.hierarchy(virtualRoot,function(d) {
     return d.clade;
   });
 
@@ -19700,7 +19712,14 @@ function flatTree(treeRoot) {
             case "speciationLoss":
               var newChildName = child.data.name+"_SpL";
               var lossChildName = child.data.name+"_Loss";
-              var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"Undefined");
+              if(config.speciationLoss == false)
+              {
+                var newChild = createNewSubTree(newChildName,newEvent);
+              }
+              else {
+                var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"undefined");
+              }
+
               node.data.clade[posChild] = newChild;
               newChild.clade.push(child.data);
               break;
@@ -19709,7 +19728,13 @@ function flatTree(treeRoot) {
             case "speciationOutLoss":
                 var newChildName = child.data.name+"_SpOL";
                 var lossChildName = child.data.name+"_Loss";
-                var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"Undefined");
+                if(config.speciationOutLoss == false)
+                {
+                  var newChild = createNewSubTree(newChildName,newEvent);
+                }
+                else {
+                  var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,newEvent.speciesLocation);
+                }
                 node.data.clade[posChild] = newChild;
                 newChild.clade.push(child.data);
               break;
@@ -19717,7 +19742,13 @@ function flatTree(treeRoot) {
             case "transferBack":
                 var newChildName = child.data.name+"_TrB";
                 var lossChildName = child.data.name+"_Loss";
-                var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"Out");
+                if(config.transferBack == false)
+                {
+                  var newChild = createNewSubTree(newChildName,newEvent);
+                }
+                else {
+                  var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"out");
+                }
                 node.data.clade[posChild] = newChild;
                 newChild.clade.push(child.data);
               break;
@@ -19730,7 +19761,9 @@ function flatTree(treeRoot) {
       });
     }
   });
-  return treeRoot;
+
+
+  return virtualRoot.clade[0];
 }
 
 function createNewSubTreeWithChild(nodeName,nodeEvent,childName,childSpeciesLocation) {
@@ -19743,6 +19776,14 @@ function createNewSubTreeWithChild(nodeName,nodeEvent,childName,childSpeciesLoca
         eventsRec : [{eventType: 'loss' , speciesLocation: childSpeciesLocation}]
       }
     ]
+  }
+}
+
+function createNewSubTree(nodeName,nodeEvent) {
+  return {
+    name : nodeName,
+    eventsRec : [nodeEvent],
+    clade : []
   }
 }
 
@@ -19790,7 +19831,6 @@ svgLinks.line = function(d) {
 svgLinks.radial = function(d) {
   var path = "";
   path += "M" + [d.source.x, d.source.y];
-
   path += "C" + [d.target.x, (d.source.y + d.target.y) / 2] + " "
   path += [d.target.x, d.target.y]+ " "
   path += [d.target.x, d.target.y];
@@ -19899,6 +19939,43 @@ d3.layout.radial = function () {
 }
 
 
+d3.layout.cladogramSpecial = function (lengthLoss) {
+  var layout = d3.cluster();
+
+  var layoutcladogramSpecial = function (root) {
+    layout(root);
+    root.each(function (d) {
+      var temp = d.x;
+      d.x = d.y;
+      d.y = temp;
+    });
+
+    var leaves = root.leaves();
+    for (d of leaves) {
+      if(d.data.lastEvent.eventType == 'loss'){
+        d.x = d.parent.x + lengthLoss;
+      }
+    }
+  }
+
+  layoutcladogramSpecial.nodeSize = function (x) {
+    var temp = x[0];
+    x[0] = x[1];
+    x[1] = temp;
+    layout = layout.nodeSize(x);
+    return layoutcladogramSpecial;
+  }
+
+  layoutcladogramSpecial.Size = function (x) {
+    layout = layout.Size(x);
+    return layoutcladogramSpecial;
+  }
+
+  return layoutcladogramSpecial;
+
+}
+
+
 function generateSVG(svg,cladeRoot) {
 
   var g = svg.append("g");
@@ -19917,7 +19994,7 @@ function generateSVG(svg,cladeRoot) {
   nodeHeigth = 30;
   action = null;
 
-  var layout = d3.layout.cladogram();
+  var layout = d3.layout.cladogramSpecial(10);
   var diagonal = svgLinks.shoulder;
 
 
@@ -20068,28 +20145,28 @@ function generateSVG(svg,cladeRoot) {
       .attr("fill", function(d) {
         switch (d.data.lastEvent.eventType) {
           case "speciation":
-            return "#fdc747"
+            return "#1F77B4"
             break;
           case "speciationOutLoss":
-            return "#1f9dea"
+            return "#2CA02C"
             break;
           case "speciationOut":
-            return "#1f9dea"
+            return "#2CA02C"
             break;
           case "bifurcationOut":
             return "black"
             break;
           case "transferBack":
-            return "#1c8116"
+            return "#D62728"
             break;
           case "duplication":
-            return "#d46e52"
+            return "#9467BD"
             break;
           case "speciationLoss":
-            return "#fdc747"
+            return "#1F77B4"
             break;
           case "leaf":
-            return "#63cf95";
+            return "#FF7F0E";
             break;
           case "loss":
             return "black";
@@ -20139,28 +20216,28 @@ function generateSVG(svg,cladeRoot) {
       .attr("stroke", function(d) {
         switch (d.data.lastEvent.eventType) {
           case "speciation":
-            return "#fdc747"
+            return "#1F77B4"
             break;
           case "speciationOutLoss":
-            return "#1f9dea"
+            return "#2CA02C"
             break;
           case "speciationOut":
-            return "#1f9dea"
+            return "#2CA02C"
             break;
           case "bifurcationOut":
             return "black"
             break;
           case "transferBack":
-            return "#1c8116"
+            return "#D62728"
             break;
           case "duplication":
-            return "#d46e52"
+            return "#9467BD"
             break;
           case "speciationLoss":
-            return "#fdc747"
+            return "#1F77B4"
             break;
           case "leaf":
-              return "#63cf95";
+              return "#FF7F0E";
             break;
           case "loss":
               return "black";
@@ -20221,7 +20298,6 @@ function parse(xmlstr,callback) {
   digester.digest(xmlstr, function (err,recTree) {
     //Talk
     console.log = cl;
-
     //We want array for recGeneTrees
     if(recTree.recPhylo)
     {
@@ -20244,8 +20320,84 @@ function parse(xmlstr,callback) {
 }
 
 },{"xml-digester":5}],9:[function(require,module,exports){
+var exports = module.exports = {};
+exports.reconcile = reconcile;
 
-},{}],10:[function(require,module,exports){
+var d3hierarchy = require('d3-hierarchy');
+
+function reconcile(rootCladeGenesTree, rootCladeSpeciesTree) {
+  //Get all loss gene leaf a species location
+  var rootNodeGt = d3hierarchy.hierarchy(rootCladeGenesTree,function (d) {
+    return d.clade;
+  });
+  var rootNodeSt = d3hierarchy.hierarchy(rootCladeSpeciesTree,function (d) {
+    return d.clade;
+  });
+
+  var nodesGt = rootNodeGt.descendants();
+  var nodesSt = rootNodeSt.descendants();
+
+  // Manage nodes with speciationLoss
+  var nodesSpeciationsWithSpeciationLossGt = nodesGt.filter(function (n) {
+    return n.data.eventsRec[0].eventType == "speciationLoss";
+  });
+
+  var nodesSpeciationsWithLossMatchSt = [];
+  for (n of nodesSpeciationsWithSpeciationLossGt) {
+    nodesSpeciationsWithLossMatchSt.push(findCladeInSpeciesTree(n.data.eventsRec[0].speciesLocation, nodesSt));
+  }
+
+  //Assert
+  if(! nodesSpeciationsWithSpeciationLossGt.length == nodesSpeciationsWithLossMatchSt.length)
+  {
+    throw "Number of loss in genesTree is different than number of speciationLoss in speciesTree"
+  }
+
+  for (var i = 0; i < nodesSpeciationsWithSpeciationLossGt.length; i++) {
+    giveSpeciesLocationToGeneLoss(nodesSpeciationsWithSpeciationLossGt[i].data,nodesSpeciationsWithLossMatchSt[i].data);
+  }
+
+}
+
+//Rechercher un clade par son nom dans l'arbre des espèces
+function findCladeInSpeciesTree(speciesLocation, nodesSt) {
+
+  var clade = nodesSt.find(function (n) {
+    return n.data.name == speciesLocation;
+  });
+
+  //Assert
+  if(!clade)
+    throw "There is a mismatch in reconcile method; spLocation : " + speciesLocation.toString();
+
+  return clade;
+}
+
+//Attribut une 'speciesLocation' au gène Loss
+function giveSpeciesLocationToGeneLoss(cladeGt, cladeSt) {
+
+  var indexLostCladeGt = cladeGt.clade.findIndex(function (child) {
+    return child.eventsRec[0].speciesLocation == "undefined";
+  });
+
+  var indexNotLostCladeGt = cladeGt.clade.findIndex(function (child) {
+    return child.eventsRec[0].speciesLocation != "undefined";
+  });
+
+  //assert
+  if(indexLostCladeGt == -1 || indexNotLostCladeGt == -1)
+    throw "Can't find speciesLocation of gene loss in reconcile method";
+
+  var lostCladeSt = cladeSt.clade.find(function (child) {
+    return child.name != cladeGt.clade[indexNotLostCladeGt].eventsRec[0].speciesLocation;
+  });
+
+  cladeGt.clade[indexLostCladeGt].eventsRec[0].speciesLocation = lostCladeSt.name;
+}
+
+},{"d3-hierarchy":2}],10:[function(require,module,exports){
+
+},{}],11:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -21793,7 +21945,7 @@ function blitBuffer (src, dst, offset, length) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":11,"ieee754":12,"is-array":13}],11:[function(require,module,exports){
+},{"base64-js":12,"ieee754":13,"is-array":14}],12:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -21919,7 +22071,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -22005,7 +22157,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 
 /**
  * isArray
@@ -22040,7 +22192,7 @@ module.exports = isArray || function (val) {
   return !! val && '[object Array]' == str.call(val);
 };
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -22340,7 +22492,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -22365,7 +22517,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /**
  * Determine if an object is Buffer
  *
@@ -22384,12 +22536,12 @@ module.exports = function (obj) {
     ))
 }
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -22482,10 +22634,10 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":20}],20:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":21}],21:[function(require,module,exports){
 // a duplex stream is just a stream that is both readable and writable.
 // Since JS doesn't have multiple prototypal inheritance, this class
 // prototypally inherits from Readable, and then parasitically from
@@ -22569,7 +22721,7 @@ function forEach (xs, f) {
   }
 }
 
-},{"./_stream_readable":22,"./_stream_writable":24,"core-util-is":25,"inherits":15,"process-nextick-args":26}],21:[function(require,module,exports){
+},{"./_stream_readable":23,"./_stream_writable":25,"core-util-is":26,"inherits":16,"process-nextick-args":27}],22:[function(require,module,exports){
 // a passthrough stream.
 // basically just the most minimal sort of Transform stream.
 // Every written chunk gets output as-is.
@@ -22598,7 +22750,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-},{"./_stream_transform":23,"core-util-is":25,"inherits":15}],22:[function(require,module,exports){
+},{"./_stream_transform":24,"core-util-is":26,"inherits":16}],23:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -23575,7 +23727,7 @@ function indexOf (xs, x) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_duplex":20,"_process":18,"buffer":10,"core-util-is":25,"events":14,"inherits":15,"isarray":17,"process-nextick-args":26,"string_decoder/":33,"util":9}],23:[function(require,module,exports){
+},{"./_stream_duplex":21,"_process":19,"buffer":11,"core-util-is":26,"events":15,"inherits":16,"isarray":18,"process-nextick-args":27,"string_decoder/":34,"util":10}],24:[function(require,module,exports){
 // a transform stream is a readable/writable stream where you do
 // something with the data.  Sometimes it's called a "filter",
 // but that's not a great name for it, since that implies a thing where
@@ -23774,7 +23926,7 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-},{"./_stream_duplex":20,"core-util-is":25,"inherits":15}],24:[function(require,module,exports){
+},{"./_stream_duplex":21,"core-util-is":26,"inherits":16}],25:[function(require,module,exports){
 // A bit simpler than readable streams.
 // Implement an async ._write(chunk, encoding, cb), and it'll handle all
 // the drain event emission and buffering.
@@ -24303,7 +24455,7 @@ function endWritable(stream, state, cb) {
   state.ended = true;
 }
 
-},{"./_stream_duplex":20,"buffer":10,"core-util-is":25,"events":14,"inherits":15,"process-nextick-args":26,"util-deprecate":27}],25:[function(require,module,exports){
+},{"./_stream_duplex":21,"buffer":11,"core-util-is":26,"events":15,"inherits":16,"process-nextick-args":27,"util-deprecate":28}],26:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -24413,7 +24565,7 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 }).call(this,{"isBuffer":require("../../../../insert-module-globals/node_modules/is-buffer/index.js")})
-},{"../../../../insert-module-globals/node_modules/is-buffer/index.js":16}],26:[function(require,module,exports){
+},{"../../../../insert-module-globals/node_modules/is-buffer/index.js":17}],27:[function(require,module,exports){
 (function (process){
 'use strict';
 module.exports = nextTick;
@@ -24430,7 +24582,7 @@ function nextTick(fn) {
 }
 
 }).call(this,require('_process'))
-},{"_process":18}],27:[function(require,module,exports){
+},{"_process":19}],28:[function(require,module,exports){
 (function (global){
 
 /**
@@ -24501,10 +24653,10 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":21}],29:[function(require,module,exports){
+},{"./lib/_stream_passthrough.js":22}],30:[function(require,module,exports){
 var Stream = (function (){
   try {
     return require('st' + 'ream'); // hack to fix a circular dependency issue when used with browserify
@@ -24518,13 +24670,13 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":20,"./lib/_stream_passthrough.js":21,"./lib/_stream_readable.js":22,"./lib/_stream_transform.js":23,"./lib/_stream_writable.js":24}],30:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":21,"./lib/_stream_passthrough.js":22,"./lib/_stream_readable.js":23,"./lib/_stream_transform.js":24,"./lib/_stream_writable.js":25}],31:[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":23}],31:[function(require,module,exports){
+},{"./lib/_stream_transform.js":24}],32:[function(require,module,exports){
 module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":24}],32:[function(require,module,exports){
+},{"./lib/_stream_writable.js":25}],33:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -24653,7 +24805,7 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":14,"inherits":15,"readable-stream/duplex.js":19,"readable-stream/passthrough.js":28,"readable-stream/readable.js":29,"readable-stream/transform.js":30,"readable-stream/writable.js":31}],33:[function(require,module,exports){
+},{"events":15,"inherits":16,"readable-stream/duplex.js":20,"readable-stream/passthrough.js":29,"readable-stream/readable.js":30,"readable-stream/transform.js":31,"readable-stream/writable.js":32}],34:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -24876,14 +25028,14 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-},{"buffer":10}],34:[function(require,module,exports){
+},{"buffer":11}],35:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],35:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -25473,4 +25625,4 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":34,"_process":18,"inherits":15}]},{},[1]);
+},{"./support/isBuffer":35,"_process":19,"inherits":16}]},{},[1]);

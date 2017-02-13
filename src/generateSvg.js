@@ -338,28 +338,28 @@ function generateSVG(svg,cladeRoot) {
       .attr("fill", function(d) {
         switch (d.data.lastEvent.eventType) {
           case "speciation":
-            return "#fdc747"
+            return "#1F77B4"
             break;
           case "speciationOutLoss":
-            return "#1f9dea"
+            return "#2CA02C"
             break;
           case "speciationOut":
-            return "#1f9dea"
+            return "#2CA02C"
             break;
           case "bifurcationOut":
             return "black"
             break;
           case "transferBack":
-            return "#1c8116"
+            return "#D62728"
             break;
           case "duplication":
-            return "#d46e52"
+            return "#9467BD"
             break;
           case "speciationLoss":
-            return "#fdc747"
+            return "#1F77B4"
             break;
           case "leaf":
-            return "#63cf95";
+            return "#FF7F0E";
             break;
           case "loss":
             return "black";
@@ -409,28 +409,28 @@ function generateSVG(svg,cladeRoot) {
       .attr("stroke", function(d) {
         switch (d.data.lastEvent.eventType) {
           case "speciation":
-            return "#fdc747"
+            return "#1F77B4"
             break;
           case "speciationOutLoss":
-            return "#1f9dea"
+            return "#2CA02C"
             break;
           case "speciationOut":
-            return "#1f9dea"
+            return "#2CA02C"
             break;
           case "bifurcationOut":
             return "black"
             break;
           case "transferBack":
-            return "#1c8116"
+            return "#D62728"
             break;
           case "duplication":
-            return "#d46e52"
+            return "#9467BD"
             break;
           case "speciationLoss":
-            return "#fdc747"
+            return "#1F77B4"
             break;
           case "leaf":
-              return "#63cf95";
+              return "#FF7F0E";
             break;
           case "loss":
               return "black";
