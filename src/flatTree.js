@@ -3,8 +3,13 @@ exports.flatTree = flatTree;
 
 var d3hierarchy = require('d3-hierarchy');
 
+var defaultConfig = {
+  transferBack : true,
+  speciationLoss : true,
+  speciationOutLoss : true,
+}
 
-function flatTree(treeRoot) {
+function flatTree(treeRoot,config = {}) {
 
   treeRootNode = d3hierarchy.hierarchy(treeRoot,function(d) {
     return d.clade;
@@ -27,7 +32,14 @@ function flatTree(treeRoot) {
             case "speciationLoss":
               var newChildName = child.data.name+"_SpL";
               var lossChildName = child.data.name+"_Loss";
-              var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"Undefined");
+              if(config.speciationLoss == false)
+              {
+                var newChild = createNewSubTree(newChildName,newEvent);
+              }
+              else {
+                var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"undefined");
+              }
+
               node.data.clade[posChild] = newChild;
               newChild.clade.push(child.data);
               break;
@@ -36,7 +48,13 @@ function flatTree(treeRoot) {
             case "speciationOutLoss":
                 var newChildName = child.data.name+"_SpOL";
                 var lossChildName = child.data.name+"_Loss";
-                var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"Undefined");
+                if(config.speciationOutLoss == false)
+                {
+                  var newChild = createNewSubTree(newChildName,newEvent);
+                }
+                else {
+                  var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"undefined");
+                }
                 node.data.clade[posChild] = newChild;
                 newChild.clade.push(child.data);
               break;
@@ -44,7 +62,13 @@ function flatTree(treeRoot) {
             case "transferBack":
                 var newChildName = child.data.name+"_TrB";
                 var lossChildName = child.data.name+"_Loss";
-                var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"Out");
+                if(config.transferBack == false)
+                {
+                  var newChild = createNewSubTree(newChildName,newEvent);
+                }
+                else {
+                  var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"out");
+                }
                 node.data.clade[posChild] = newChild;
                 newChild.clade.push(child.data);
               break;
@@ -70,6 +94,14 @@ function createNewSubTreeWithChild(nodeName,nodeEvent,childName,childSpeciesLoca
         eventsRec : [{eventType: 'loss' , speciesLocation: childSpeciesLocation}]
       }
     ]
+  }
+}
+
+function createNewSubTree(nodeName,nodeEvent) {
+  return {
+    name : nodeName,
+    eventsRec : [nodeEvent],
+    clade : []
   }
 }
 

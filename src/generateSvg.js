@@ -24,7 +24,6 @@ svgLinks.line = function(d) {
 svgLinks.radial = function(d) {
   var path = "";
   path += "M" + [d.source.x, d.source.y];
-
   path += "C" + [d.target.x, (d.source.y + d.target.y) / 2] + " "
   path += [d.target.x, d.target.y]+ " "
   path += [d.target.x, d.target.y];
@@ -133,6 +132,43 @@ d3.layout.radial = function () {
 }
 
 
+d3.layout.cladogramSpecial = function (lengthLoss) {
+  var layout = d3.cluster();
+
+  var layoutcladogramSpecial = function (root) {
+    layout(root);
+    root.each(function (d) {
+      var temp = d.x;
+      d.x = d.y;
+      d.y = temp;
+    });
+
+    var leaves = root.leaves();
+    for (d of leaves) {
+      if(d.data.lastEvent.eventType == 'loss'){
+        d.x = d.parent.x + lengthLoss;
+      }
+    }
+  }
+
+  layoutcladogramSpecial.nodeSize = function (x) {
+    var temp = x[0];
+    x[0] = x[1];
+    x[1] = temp;
+    layout = layout.nodeSize(x);
+    return layoutcladogramSpecial;
+  }
+
+  layoutcladogramSpecial.Size = function (x) {
+    layout = layout.Size(x);
+    return layoutcladogramSpecial;
+  }
+
+  return layoutcladogramSpecial;
+
+}
+
+
 function generateSVG(svg,cladeRoot) {
 
   var g = svg.append("g");
@@ -151,7 +187,7 @@ function generateSVG(svg,cladeRoot) {
   nodeHeigth = 30;
   action = null;
 
-  var layout = d3.layout.cladogram();
+  var layout = d3.layout.cladogramSpecial(10);
   var diagonal = svgLinks.shoulder;
 
 

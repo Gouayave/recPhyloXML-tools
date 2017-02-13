@@ -10,17 +10,18 @@ var domv = require('domv');
 
 
 
-var pathRecPhylo = "/home/gence/testDTLB2"
-
+var pathRecPhylo = "/home/gence/Projets/rpXML-visu-cmd/examples/example_2.xml"
 var xmlStrRecPhylo = fs.readFileSync(pathRecPhylo, 'utf8');
 
+var flatTreeConfig = {
+  transferBack : false
+}
 
 parse.parse(xmlStrRecPhylo, function (err,recTree) {
   var document = domv.createHtmlDomDocument();
   assert(recTree.recPhylo.recGeneTree[0].phylogeny);
   var cladeRoot = recTree.recPhylo.recGeneTree[0].phylogeny.clade;
-  flatTree.flatTree(cladeRoot);
-
+  flatTree.flatTree(cladeRoot,flatTreeConfig);
 
   var svg = d3.select(document.body).append("svg");
 
