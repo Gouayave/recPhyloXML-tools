@@ -11,7 +11,7 @@ var domv = require('domv');
 
 
 
-var pathRecPhylo = "/home/gence/Projets/rpXML-visu-cmd/examples/rpRef.xml"
+var pathRecPhylo = "/home/gence/Projets/rpXML-visu-cmd/examples/rpRef2.xml"
 var xmlStrRecPhylo = fs.readFileSync(pathRecPhylo, 'utf8');
 
 var flatTreeConfig = {

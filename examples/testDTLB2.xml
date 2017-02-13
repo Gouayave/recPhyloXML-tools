@@ -3,6 +3,7 @@
     <clade>
       <name>-1</name>
       <eventsRec>
+        <speciationOutLoss destinationSpecies="1"></speciationOutLoss>
         <transferBack destinationSpecies="1"></transferBack>
         <duplication speciesLocation="1"></duplication>
       </eventsRec>

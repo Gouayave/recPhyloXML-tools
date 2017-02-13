@@ -10,7 +10,7 @@ var defaultConfig = {
 }
 
 function flatTree(treeRoot,config = {}) {
-  
+
   var virtualRoot = {
     name : "Out",
     eventsRec : treeRoot.eventsRec,
@@ -29,11 +29,11 @@ function flatTree(treeRoot,config = {}) {
 
         var listEvents = child.data.eventsRec;
         var newEvent = null;
+        var startNode = undefined;
+        var currentNode = undefined;
 
 
-        while (listEvents && (newEvent = listEvents.shift()))
-        {
-
+        while (listEvents && (newEvent = listEvents.shift())){
           switch (newEvent.eventType) {
             case "speciationLoss":
               var newChildName = child.data.name+"_SpL";
@@ -46,8 +46,16 @@ function flatTree(treeRoot,config = {}) {
                 var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"undefined");
               }
 
-              node.data.clade[posChild] = newChild;
-              newChild.clade.push(child.data);
+              if(!startNode && !currentNode)
+              {
+                startNode = newChild;
+                currentNode = newChild;
+              }else {
+                currentNode.clade.push(newChild);
+                currentNode = newChild;
+              }
+
+
               break;
 
 
@@ -61,8 +69,16 @@ function flatTree(treeRoot,config = {}) {
                 else {
                   var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,newEvent.speciesLocation);
                 }
-                node.data.clade[posChild] = newChild;
-                newChild.clade.push(child.data);
+
+                if(!startNode && !currentNode)
+                {
+                  startNode = newChild;
+                  currentNode = newChild;
+                }else {
+                  currentNode.clade.push(newChild);
+                  currentNode = newChild;
+                }
+
               break;
 
             case "transferBack":
@@ -75,15 +91,28 @@ function flatTree(treeRoot,config = {}) {
                 else {
                   var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"out");
                 }
-                node.data.clade[posChild] = newChild;
-                newChild.clade.push(child.data);
+
+                if(!startNode && !currentNode)
+                {
+                  startNode = newChild;
+                  currentNode = newChild;
+                }else {
+                  currentNode.clade.push(newChild);
+                  currentNode = newChild;
+                }
+
               break;
 
             default:
               child.data.eventsRec = [newEvent];
-
           }
         }
+        if(startNode && currentNode)
+        {
+          node.data.clade[posChild] = startNode;
+          currentNode.clade.push(child.data);
+        }
+
       });
     }
   });
