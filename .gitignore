@@ -3,3 +3,4 @@ node_modules/
 assets/
 rpXML-visu.tar.gz
 examples/gt1.svg
+build/rpXML.js

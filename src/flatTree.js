@@ -53,7 +53,7 @@ function flatTree(treeRoot,config = {}) {
                   var newChild = createNewSubTree(newChildName,newEvent);
                 }
                 else {
-                  var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,"undefined");
+                  var newChild = createNewSubTreeWithChild(newChildName,newEvent,lossChildName,newEvent.speciesLocation);
                 }
                 node.data.clade[posChild] = newChild;
                 newChild.clade.push(child.data);
