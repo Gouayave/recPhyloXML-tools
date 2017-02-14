@@ -11,12 +11,34 @@ var domv = require('domv');
 
 
 
-var pathRecPhylo = "/home/gence/Projets/rpXML-visu-cmd/examples/rpRef2.xml"
+var pathRecPhylo = "/home/gence/Projets/rpXML-visu-cmd/examples/genesTree1.xml"
 var xmlStrRecPhylo = fs.readFileSync(pathRecPhylo, 'utf8');
 
 var flatTreeConfig = {
   transferBack : false
 }
+
+// var config = {
+//   layout : "cladogramSpecial",
+//   links : "shoulder",
+//   symbolSize : 512  ,
+//   lengthLinkLoss : 10,
+//   linkStrokeSize : 2,
+//   nodeWidth : 60,
+//   nodeHeigth : 60,
+//   margin : { top: 40, down: 20, left: 50, right: 50},
+//   color : {
+//     speciation : "#1F77B4",
+//     speciationOutLoss : "#D62728",
+//     speciationOut : "#D62728",
+//     bifurcationOut : "#D62728",
+//     transferBack : "#D62728",
+//     duplication : "#9467BD",
+//     speciationLoss : "#1F77B4",
+//     leaf : "#1F77B4",
+//     loss : "#000000"
+//   }
+// }
 
 parse.parse(xmlStrRecPhylo, function (err,recTree) {
   var document = domv.createHtmlDomDocument();
