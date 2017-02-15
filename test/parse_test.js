@@ -11,7 +11,7 @@ var domv = require('domv');
 
 
 
-var pathRecPhylo = "/home/gence/Projets/rpXML-visu-cmd/examples/genesTree1.xml"
+var pathRecPhylo = "/home/gence/Projets/rpXML-visu-cmd/examples/example_5.xml"
 var xmlStrRecPhylo = fs.readFileSync(pathRecPhylo, 'utf8');
 
 var flatTreeConfig = {
@@ -41,7 +41,7 @@ var flatTreeConfig = {
 // }
 
 parse.parse(xmlStrRecPhylo, function (err,recTree) {
-  var document = domv.createHtmlDomDocument();
+  document = domv.createHtmlDomDocument();
   assert(recTree.recPhylo.recGeneTree[0].phylogeny);
   var cladeRootGt = recTree.recPhylo.recGeneTree[0].phylogeny.clade;
   cladeRootGt = flatTree.flatTree(cladeRootGt,flatTreeConfig);
@@ -54,15 +54,17 @@ parse.parse(xmlStrRecPhylo, function (err,recTree) {
   }
 
 
-  var svg = d3.select(document.body).append("svg");
+  var svg = d3.select(document.body).append("svg").attr("id","visuRecPhylo");
+
 
   generateSVG.generateSVG(svg,cladeRootGt);
+
 
   var svgtextout = "";
   svgtextout += "\<?xml version=\"1.0\" standalone=\"no\"?\>\n\<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \n\"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\"\> ";
   svgtextout += document.body.innerHTML;
 
-  //console.log(lines);
+
   try{
       console.log(svgtextout)
   } catch (err) {

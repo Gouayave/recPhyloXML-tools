@@ -181,7 +181,7 @@ function generateSVG(svg,cladeRoot,config = {}) {
     linkStrokeSize : config.linkStrokeSize || 2,
     nodeWidth : config.nodeWidth || 30,
     nodeHeigth : config.nodeHeigth || 30,
-    margin : config.margin || { top: 40, down: 20, left: 200, right: 50},
+    margin : config.margin || { top: 10, down: 20, left: 500  , right: 50},
     color : config.color || {
       speciation : "#1F77B4",
       speciationOutLoss : "#2CA02C",
@@ -204,7 +204,12 @@ function generateSVG(svg,cladeRoot,config = {}) {
     }
   }
 
-  var g = svg.append("g");
+  var g = svg
+  .append("g")
+  .attr("width", "auto")
+  .attr("height", "auto")
+  .append("g")
+  .attr("id","svgZone");
 
   var color = d3.scaleOrdinal(d3.schemeCategory10);
   var symbol = d3.symbol().size(configLayout.symbolSize);
@@ -262,11 +267,19 @@ function generateSVG(svg,cladeRoot,config = {}) {
     });
 
     var heightSVG = maxY - minY;
+    //console.log(minX,maxX,minY,maxY)
+
+    treeRoot.each(function (d) {
+      d.x = d.x + margin.right
+      d.y = d.y + Math.abs(minY) + margin.top;
+    });
 
 
-    svg.attr("width", widthSVG + margin.right + margin.left);
+    // svg.attr("width", "100%");
+    svg.attr("width", heightSVG + margin.right + margin.left);
     svg.attr("height", heightSVG + margin.top + margin.down);
-    g.attr("transform", "translate(" + (margin.right - minX) + "," + (margin.top - minY) + ")")
+    //g.attr("transform", "translate(" + (margin.right - minX) + "," + (margin.top - minY) + ")")
+    //g.attr("transform", "translate(" + 50 + "," + -minY + 30 + ")")
 
     //------LINK----------
     var link =
@@ -493,8 +506,34 @@ function generateSVG(svg,cladeRoot,config = {}) {
         if (d.data.lastEvent.destinationSpecies) {
           name += " ( -> " + d.data.lastEvent.destinationSpecies + ")";
         }
+
         return name;
       });
+
+      function getMethods(obj) {
+          var result = [];
+          for (var id in obj) {
+            try {
+              if (typeof(obj[id]) == "function") {
+                result.push(id + ": " + obj[id].toString());
+              }
+            } catch (err) {
+              result.push(id + ": inaccessible");
+            }
+          }
+          return result;
+        }
+
+        svg
+        .append("rect")
+
+
+        // var test = allNodes
+        //   .select(".label");
+        // console.log(test)
+
+      // console.log(document.getElementsByClassName ('label')[0].getBoundingClientRect());
+
   };
 
 }

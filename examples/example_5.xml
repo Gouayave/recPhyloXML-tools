@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<recGeneTree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phyloxml.org" xsi:schemaLocation="../recxml.xsd">
+ <phylogeny rooted="true">
+  <clade>
+   <name>76</name>
+   <eventsRec>
+    <speciation speciesLocation="522"></speciation>
+   </eventsRec>
+   <clade>
+    <name>14</name>
+    <eventsRec>
+     <speciationLoss speciesLocation="521"></speciationLoss>
+     <speciation speciesLocation="520"></speciation>
+    </eventsRec>
+    <clade>
+     <name>565655_000157355_2_Ecasseliflavu_@WP_015510080_1</name>
+     <eventsRec>
+      <leaf speciesLocation="565655_000157355_2_Ecasseliflavu_"></leaf>
+     </eventsRec>
+    </clade>
+    <clade>
+     <name>13</name>
+     <eventsRec>
+      <speciation speciesLocation="518"></speciation>
+     </eventsRec>
+     <clade>
+      <name>5</name>
+      <eventsRec>
+       <speciation speciesLocation="517"></speciation>
+      </eventsRec>
+      <clade>
+       <name>1261557_000317915_1_Efaecalis_@WP_002410201_1</name>
+       <eventsRec>
+        <speciationLoss speciesLocation="515"></speciationLoss>
+        <leaf speciesLocation="1261557_000317915_1_Efaecalis_"></leaf>
+       </eventsRec>
+      </clade>
+      <clade>
+       <name>4</name>
+       <eventsRec>
+        <speciationOut speciesLocation="1090974_000283975_1_Mplutonius_"></speciationOut>
+       </eventsRec>
+       <clade>
+        <name>1090974_000283975_1_Mplutonius_@WP_015694884_1</name>
+        <eventsRec>
+         <leaf speciesLocation="1090974_000283975_1_Mplutonius_"></leaf>
+        </eventsRec>
+       </clade>
+       <clade>
+        <name>332949_001465115_1_Esilesiacus_@ALS00702_1</name>
+        <eventsRec>
+         <transferBack destinationSpecies="332949_001465115_1_Esilesiacus_"></transferBack>
+         <leaf speciesLocation="332949_001465115_1_Esilesiacus_"></leaf>
+        </eventsRec>
+       </clade>
+      </clade>
+     </clade>
+     <clade>
+      <name>12</name>
+      <eventsRec>
+       <speciation speciesLocation="512"></speciation>
+      </eventsRec>
+      <clade>
+       <name>1352_001412695_1_Efaecium_@WP_002321398_1</name>
+       <eventsRec>
+        <speciationLoss speciesLocation="511"></speciationLoss>
+        <leaf speciesLocation="1352_001412695_1_Efaecium_"></leaf>
+       </eventsRec>
+      </clade>
+      <clade>
+       <name>11</name>
+       <eventsRec>
+        <speciationOut speciesLocation="1300150_000504125_1_Emundtii_"></speciationOut>
+       </eventsRec>
+       <clade>
+        <name>1300150_000504125_1_Emundtii_@WP_023519468_1</name>
+        <eventsRec>
+         <leaf speciesLocation="1300150_000504125_1_Emundtii_"></leaf>
+        </eventsRec>
+       </clade>
+       <clade>
+        <name>10</name>
+        <eventsRec>
+         <transferBack destinationSpecies="510"></transferBack>
+         <speciation speciesLocation="510"></speciation>
+        </eventsRec>
+        <clade>
+         <name>53345_001267395_1_Edurans_@WP_016176832_1</name>
+         <eventsRec>
+          <leaf speciesLocation="53345_001267395_1_Edurans_"></leaf>
+         </eventsRec>
+        </clade>
+        <clade>
+         <name>768486_000271405_2_Ehirae_@WP_010737344_1</name>
+         <eventsRec>
+          <leaf speciesLocation="768486_000271405_2_Ehirae_"></leaf>
+         </eventsRec>
+        </clade>
+       </clade>
+      </clade>
+     </clade>
+    </clade>
+   </clade>
+   <clade>
+    <name>75</name>
+    <eventsRec>
+     <speciation speciesLocation="504"></speciation>
+    </eventsRec>
+    <clade>
+     <name>19</name>
+     <eventsRec>
+      <speciation speciesLocation="503"></speciation>
+     </eventsRec>
+     <clade>
+      <name>297352_000981525_1_Lpiscium_@WP_047915397_1</name>
+      <eventsRec>
+       <leaf speciesLocation="297352_000981525_1_Lpiscium_"></leaf>
+      </eventsRec>
+     </clade>
+     <clade>
+      <name>18</name>
+      <eventsRec>
+       <speciation speciesLocation="502"></speciation>
+      </eventsRec>
+      <clade>
+       <name>1117941_000478255_2_Llactis_@AII13209_1</name>
+       <eventsRec>
+        <leaf speciesLocation="1117941_000478255_2_Llactis_"></leaf>
+       </eventsRec>
+      </clade>
+      <clade>
+       <name>420890_000269945_1_Lgarvieae_@WP_014024431_1</name>
+       <eventsRec>
+        <leaf speciesLocation="420890_000269945_1_Lgarvieae_"></leaf>
+       </eventsRec>
+      </clade>
+     </clade>
+    </clade>
+    <clade>
+     <name>74</name>
+     <eventsRec>
+      <speciationLoss speciesLocation="498"></speciationLoss>
+      <speciationLoss speciesLocation="468"></speciationLoss>
+      <speciation speciesLocation="467"></speciation>
+     </eventsRec>
+     <clade>
+      <name>30</name>
+      <eventsRec>
+       <speciationLoss speciesLocation="455"></speciationLoss>
+       <speciation speciesLocation="454"></speciation>
+      </eventsRec>
+      <clade>
+       <name>22</name>
+       <eventsRec>
+        <speciation speciesLocation="446"></speciation>
+       </eventsRec>
+       <clade>
+        <name>927666_000253155_1_Soralis_@WP_000039243_1</name>
+        <eventsRec>
+         <leaf speciesLocation="927666_000253155_1_Soralis_"></leaf>
+        </eventsRec>
+       </clade>
+       <clade>
+        <name>1419814_000688775_1_Ssp_@WP_044021314_1</name>
+        <eventsRec>
+         <leaf speciesLocation="1419814_000688775_1_Ssp_"></leaf>
+        </eventsRec>
+       </clade>
+      </clade>
+      <clade>
+       <name>29</name>
+       <eventsRec>
+        <speciation speciesLocation="453"></speciation>
+       </eventsRec>
+       <clade>
+        <name>28037_001281025_1_Smitis_@WP_060627575_1</name>
+        <eventsRec>
+         <speciationLoss speciesLocation="452"></speciationLoss>
+         <leaf speciesLocation="28037_001281025_1_Smitis_"></leaf>
+        </eventsRec>
+       </clade>
+       <clade>
+        <name>28</name>
+        <eventsRec>
+         <speciationOut speciesLocation="449"></speciationOut>
+        </eventsRec>
+        <clade>
+         <name>1054460_000221985_1_Spseudopneumo_@WP_000039262_1</name>
+         <eventsRec>
+          <transferBack destinationSpecies="1054460_000221985_1_Spseudopneumo_"></transferBack>
+          <leaf speciesLocation="1054460_000221985_1_Spseudopneumo_"></leaf>
+         </eventsRec>
+        </clade>
+        <clade>
+         <name>27</name>
+         <eventsRec>
+          <speciation speciesLocation="449"></speciation>
+         </eventsRec>
+         <clade>
+          <name>1313_001255215_1_Asp_@WP_053039449_1</name>
+          <eventsRec>
+           <leaf speciesLocation="1313_001255215_1_Asp_"></leaf>
+          </eventsRec>
+         </clade>
+         <clade>
+          <name>171101_000007045_1_Spneumoniae_@NP_357928_1</name>
+          <eventsRec>
+           <leaf speciesLocation="171101_000007045_1_Spneumoniae_"></leaf>
+          </eventsRec>
+         </clade>
+        </clade>
+       </clade>
+      </clade>
+     </clade>
+     <clade>
+      <name>73</name>
+      <eventsRec>
+       <speciationOut speciesLocation="466"></speciationOut>
+      </eventsRec>
+      <clade>
+       <name>43</name>
+       <eventsRec>
+        <speciation speciesLocation="466"></speciation>
+       </eventsRec>
+       <clade>
+        <name>35</name>
+        <eventsRec>
+         <speciation speciesLocation="465"></speciation>
+        </eventsRec>
+        <clade>
+         <name>1353243_000478925_1_Sanginosus_@WP_025271945_1</name>
+         <eventsRec>
+          <leaf speciesLocation="1353243_000478925_1_Sanginosus_"></leaf>
+         </eventsRec>
+        </clade>
+        <clade>
+         <name>34</name>
+         <eventsRec>
+          <speciation speciesLocation="464"></speciation>
+         </eventsRec>
+         <clade>
+          <name>1338_001296205_1_Sintermedius_@ALF28095_1</name>
+          <eventsRec>
+           <leaf speciesLocation="1338_001296205_1_Sintermedius_"></leaf>
+          </eventsRec>
+         </clade>
+         <clade>
+          <name>862968_000463445_1_Sconstellatus_@WP_020997625_1</name>
+          <eventsRec>
+           <leaf speciesLocation="862968_000463445_1_Sconstellatus_"></leaf>
+          </eventsRec>
+         </clade>
+        </clade>
+       </clade>
+       <clade>
+        <name>42</name>
+        <eventsRec>
+         <speciation speciesLocation="460"></speciation>
+        </eventsRec>
+        <clade>
+         <name>38</name>
+         <eventsRec>
+          <speciation speciesLocation="459"></speciation>
+         </eventsRec>
+         <clade>
+          <name>1302863_000385925_1_Soligoferment_@WP_015605367_1</name>
+          <eventsRec>
+           <leaf speciesLocation="1302863_000385925_1_Soligoferment_"></leaf>
+          </eventsRec>
+         </clade>
+         <clade>
+          <name>388919_000014205_1_Ssanguinis_@YP_001035785_1</name>
+          <eventsRec>
+           <leaf speciesLocation="388919_000014205_1_Ssanguinis_"></leaf>
+          </eventsRec>
+         </clade>
+        </clade>
+        <clade>
+         <name>41</name>
+         <eventsRec>
+          <speciationOut speciesLocation="467705_000017005_1_Sgordonii_"></speciationOut>
+         </eventsRec>
+         <clade>
+          <name>1114965_000262145_1_Sparasanguini_@WP_014712734_1</name>
+          <eventsRec>
+           <transferBack destinationSpecies="1114965_000262145_1_Sparasanguini_"></transferBack>
+           <leaf speciesLocation="1114965_000262145_1_Sparasanguini_"></leaf>
+          </eventsRec>
+         </clade>
+         <clade>
+          <name>467705_000017005_1_Sgordonii_@WP_041789565_1</name>
+          <eventsRec>
+           <leaf speciesLocation="467705_000017005_1_Sgordonii_"></leaf>
+          </eventsRec>
+         </clade>
+        </clade>
+       </clade>
+      </clade>
+      <clade>
+       <name>72</name>
+       <eventsRec>
+        <transferBack destinationSpecies="498"></transferBack>
+        <speciation speciesLocation="498"></speciation>
+       </eventsRec>
+       <clade>
+        <name>1307_000993745_1_Ssuis_@WP_011921984_1</name>
+        <eventsRec>
+         <speciationLoss speciesLocation="468"></speciationLoss>
+         <leaf speciesLocation="1307_000993745_1_Ssuis_"></leaf>
+        </eventsRec>
+       </clade>
+       <clade>
+        <name>71</name>
+        <eventsRec>
+         <speciation speciesLocation="497"></speciation>
+        </eventsRec>
+        <clade>
+         <name>1437447_000817065_1_Smutans_@WP_002263048_1</name>
+         <eventsRec>
+          <leaf speciesLocation="1437447_000817065_1_Smutans_"></leaf>
+         </eventsRec>
+        </clade>
+        <clade>
+         <name>70</name>
+         <eventsRec>
+          <speciation speciesLocation="496"></speciation>
+         </eventsRec>
+         <clade>
+          <name>48</name>
+          <eventsRec>
+           <speciationLoss speciesLocation="495"></speciationLoss>
+           <speciation speciesLocation="481"></speciation>
+          </eventsRec>
+          <clade>
+           <name>1304_000785515_1_Ssalivarius_@WP_038675257_1</name>
+           <eventsRec>
+            <leaf speciesLocation="1304_000785515_1_Ssalivarius_"></leaf>
+           </eventsRec>
+          </clade>
+          <clade>
+           <name>1308_000971665_1_Sthermophilus_@WP_002947758_1</name>
+           <eventsRec>
+            <leaf speciesLocation="1308_000971665_1_Sthermophilus_"></leaf>
+           </eventsRec>
+          </clade>
+         </clade>
+         <clade>
+          <name>69</name>
+          <eventsRec>
+           <speciationOut speciesLocation="478"></speciationOut>
+          </eventsRec>
+          <clade>
+           <name>55</name>
+           <eventsRec>
+            <speciation speciesLocation="478"></speciation>
+           </eventsRec>
+           <clade>
+            <name>1076934_000441535_1_Slutetiensis_@WP_020916302_1</name>
+            <eventsRec>
+             <speciationLoss speciesLocation="472"></speciationLoss>
+             <leaf speciesLocation="1076934_000441535_1_Slutetiensis_"></leaf>
+            </eventsRec>
+           </clade>
+           <clade>
+            <name>54</name>
+            <eventsRec>
+             <speciation speciesLocation="477"></speciation>
+            </eventsRec>
+            <clade>
+             <name>981540_000270165_1_Spasteurianus_@WP_013851519_1</name>
+             <eventsRec>
+              <leaf speciesLocation="981540_000270165_1_Spasteurianus_"></leaf>
+             </eventsRec>
+            </clade>
+            <clade>
+             <name>53</name>
+             <eventsRec>
+              <speciation speciesLocation="475"></speciation>
+             </eventsRec>
+             <clade>
+              <name>990317_000203195_1_Sgallolyticus_@WP_013642734_1</name>
+              <eventsRec>
+               <leaf speciesLocation="990317_000203195_1_Sgallolyticus_"></leaf>
+              </eventsRec>
+             </clade>
+             <clade>
+              <name>1116231_000283635_1_Smacedonicus_@WP_014294058_1</name>
+              <eventsRec>
+               <leaf speciesLocation="1116231_000283635_1_Smacedonicus_"></leaf>
+              </eventsRec>
+             </clade>
+            </clade>
+           </clade>
+          </clade>
+          <clade>
+           <name>68</name>
+           <eventsRec>
+            <transferBack destinationSpecies="494"></transferBack>
+            <speciation speciesLocation="494"></speciation>
+           </eventsRec>
+           <clade>
+            <name>1311_001026925_1_Sagalactiae_@WP_001287870_1</name>
+            <eventsRec>
+             <leaf speciesLocation="1311_001026925_1_Sagalactiae_"></leaf>
+            </eventsRec>
+           </clade>
+           <clade>
+            <name>67</name>
+            <eventsRec>
+             <speciationOut speciesLocation="493"></speciationOut>
+            </eventsRec>
+            <clade>
+             <name>218495_000009545_1_Suberis_@WP_015911722_1</name>
+             <eventsRec>
+              <transferBack destinationSpecies="218495_000009545_1_Suberis_"></transferBack>
+              <leaf speciesLocation="218495_000009545_1_Suberis_"></leaf>
+             </eventsRec>
+            </clade>
+            <clade>
+             <name>66</name>
+             <eventsRec>
+              <speciation speciesLocation="493"></speciation>
+             </eventsRec>
+             <clade>
+              <name>1346_000831485_1_Siniae_@WP_003101780_1</name>
+              <eventsRec>
+               <speciationLoss speciesLocation="492"></speciationLoss>
+               <leaf speciesLocation="1346_000831485_1_Siniae_"></leaf>
+              </eventsRec>
+             </clade>
+             <clade>
+              <name>65</name>
+              <eventsRec>
+               <speciationOut speciesLocation="487"></speciationOut>
+              </eventsRec>
+              <clade>
+               <name>63</name>
+               <eventsRec>
+                <speciation speciesLocation="487"></speciation>
+               </eventsRec>
+               <clade>
+                <name>552526_000020765_1_Sequi_@WP_012516155_1</name>
+                <eventsRec>
+                 <leaf speciesLocation="552526_000020765_1_Sequi_"></leaf>
+                </eventsRec>
+               </clade>
+               <clade>
+                <name>62</name>
+                <eventsRec>
+                 <speciation speciesLocation="486"></speciation>
+                </eventsRec>
+                <clade>
+                 <name>617121_000307185_1_Sdysgalactiae_@WP_015017303_1</name>
+                 <eventsRec>
+                  <leaf speciesLocation="617121_000307185_1_Sdysgalactiae_"></leaf>
+                 </eventsRec>
+                </clade>
+                <clade>
+                 <name>160491_000009385_1_Spyogenes_@WP_002983629_1</name>
+                 <eventsRec>
+                  <leaf speciesLocation="160491_000009385_1_Spyogenes_"></leaf>
+                 </eventsRec>
+                </clade>
+               </clade>
+              </clade>
+              <clade>
+               <name>873447_000187935_2_Sparauberis_@EGE54273_1</name>
+               <eventsRec>
+                <transferBack destinationSpecies="873447_000187935_2_Sparauberis_"></transferBack>
+                <leaf speciesLocation="873447_000187935_2_Sparauberis_"></leaf>
+               </eventsRec>
+              </clade>
+             </clade>
+            </clade>
+           </clade>
+          </clade>
+         </clade>
+        </clade>
+       </clade>
+      </clade>
+     </clade>
+    </clade>
+   </clade>
+  </clade>
+ </phylogeny>
+</recGeneTree>

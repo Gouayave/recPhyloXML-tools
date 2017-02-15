@@ -20005,26 +20005,60 @@ d3.layout.cladogramSpecial = function (lengthLoss) {
 }
 
 
-function generateSVG(svg,cladeRoot) {
 
-  var g = svg.append("g");
+function generateSVG(svg,cladeRoot,config = {}) {
 
-  var color = d3.scaleOrdinal(d3.schemeCategory10);
-  var symbol = d3.symbol().size(128);
 
-  margin = {
-    top: 40,
-    down: 20,
-    left: 200,
-    right: 50
+  var configLayout = {
+    layout : config.layout || "cladogramSpecial",
+    links : config.links || "shoulder",
+    symbolSize : config.symbolSize || 128,
+    lengthLinkLoss : config.lengthLinkLoss || 10,
+    linkStrokeSize : config.linkStrokeSize || 2,
+    nodeWidth : config.nodeWidth || 30,
+    nodeHeigth : config.nodeHeigth || 30,
+    margin : config.margin || { top: 10, down: 20, left: 500  , right: 50},
+    color : config.color || {
+      speciation : "#1F77B4",
+      speciationOutLoss : "#2CA02C",
+      speciationOut : "#2CA02C",
+      bifurcationOut : "#000000",
+      transferBack : "#D62728",
+      duplication : "#9467BD",
+      speciationLoss : "#1F77B4",
+      leaf : "#FF7F0E",
+      loss : "#000000"
+    },
+    symbols : config.symbols || {
+      speciation : "symbolCircle",
+      speciationOutLoss : "symbolCircle",
+      speciationOut : "symbolCircle",
+      bifurcationOut : "symbolCircle",
+      transferBack : "symbolDiamond",
+      duplication : "symbolSquare",
+      speciationLoss : "symbolCircle"
+    }
   }
 
-  nodeWidth = 30;
-  nodeHeigth = 30;
+  var g = svg
+  .append("g")
+  .attr("width", "auto")
+  .attr("height", "auto")
+  .append("g")
+  .attr("id","svgZone");
+
+  var color = d3.scaleOrdinal(d3.schemeCategory10);
+  var symbol = d3.symbol().size(configLayout.symbolSize);
+
+  margin = configLayout.margin;
+
+  nodeWidth = configLayout.nodeWidth;
+  nodeHeigth = configLayout.nodeHeigth;
   action = null;
 
-  var layout = d3.layout.cladogramSpecial(10);
-  var diagonal = svgLinks.shoulder;
+
+  var layout = d3.layout[configLayout.layout](configLayout.lengthLinkLoss);
+  var diagonal = svgLinks[configLayout.links];
 
 
   updateLayout(cladeRoot);
@@ -20069,11 +20103,19 @@ function generateSVG(svg,cladeRoot) {
     });
 
     var heightSVG = maxY - minY;
+    //console.log(minX,maxX,minY,maxY)
+
+    treeRoot.each(function (d) {
+      d.x = d.x + margin.right
+      d.y = d.y + Math.abs(minY) + margin.top;
+    });
 
 
-    svg.attr("width", widthSVG + margin.right + margin.left);
+    // svg.attr("width", "100%");
+    svg.attr("width", heightSVG + margin.right + margin.left);
     svg.attr("height", heightSVG + margin.top + margin.down);
-    g.attr("transform", "translate(" + (margin.right - minX) + "," + (margin.top - minY) + ")")
+    //g.attr("transform", "translate(" + (margin.right - minX) + "," + (margin.top - minY) + ")")
+    //g.attr("transform", "translate(" + 50 + "," + -minY + 30 + ")")
 
     //------LINK----------
     var link =
@@ -20094,7 +20136,7 @@ function generateSVG(svg,cladeRoot) {
     linkEnter
       .merge(link)
       .attr("fill","none")
-      .attr("stroke-width",2)
+      .attr("stroke-width",configLayout.linkStrokeSize)
       .attr("stroke",function (d) {
         if(d.target.data.deadSpecies)
         {
@@ -20174,58 +20216,58 @@ function generateSVG(svg,cladeRoot) {
       .attr("fill", function(d) {
         switch (d.data.lastEvent.eventType) {
           case "speciation":
-            return "#1F77B4"
+            return configLayout.color.speciation
             break;
           case "speciationOutLoss":
-            return "#2CA02C"
+            return configLayout.color.speciationOutLoss
             break;
           case "speciationOut":
-            return "#2CA02C"
+            return configLayout.color.speciationOut
             break;
           case "bifurcationOut":
-            return "black"
+            return configLayout.color.bifurcationOut
             break;
           case "transferBack":
-            return "#D62728"
+            return configLayout.color.transferBack
             break;
           case "duplication":
-            return "#9467BD"
+            return configLayout.color.duplication
             break;
           case "speciationLoss":
-            return "#1F77B4"
+            return configLayout.color.speciationLoss
             break;
           case "leaf":
-            return "#FF7F0E";
+            return configLayout.color.leaf
             break;
           case "loss":
-            return "black";
+            return configLayout.color.loss
             break;
           default:
-
         }
+
       })
       .attr("d", function(d) {
         switch (d.data.lastEvent.eventType) {
           case "speciation":
-            return symbol.type(d3.symbolCircle)()
+            return symbol.type(d3[configLayout.symbols.speciation])()
             break;
           case "speciationOutLoss":
-            return symbol.type(d3.symbolCircle)()
+            return symbol.type(d3[configLayout.symbols.speciationOutLoss])()
             break;
           case "speciationOut":
-            return symbol.type(d3.symbolCircle)()
+            return symbol.type(d3[configLayout.symbols.speciationOut])()
             break;
           case "bifurcationOut":
-            return symbol.type(d3.symbolCircle)()
+            return symbol.type(d3[configLayout.symbols.bifurcationOut])()
             break;
           case "transferBack":
-            return symbol.type(d3.symbolDiamond)()
+            return symbol.type(d3[configLayout.symbols.transferBack])()
             break;
           case "duplication":
-            return symbol.type(d3.symbolSquare)()
+            return symbol.type(d3[configLayout.symbols.duplication])()
             break;
           case "speciationLoss":
-            return symbol.type(d3.symbolCircle)()
+            return symbol.type(d3[configLayout.symbols.speciationLoss])()
             break;
           case "leaf":
             return symbol.type(d3.symbolTriangle)()
@@ -20245,36 +20287,37 @@ function generateSVG(svg,cladeRoot) {
       .attr("stroke", function(d) {
         switch (d.data.lastEvent.eventType) {
           case "speciation":
-            return "#1F77B4"
+            return configLayout.color.speciation
             break;
           case "speciationOutLoss":
-            return "#2CA02C"
+            return configLayout.color.speciationOutLoss
             break;
           case "speciationOut":
-            return "#2CA02C"
+            return configLayout.color.speciationOut
             break;
           case "bifurcationOut":
-            return "black"
+            return configLayout.color.bifurcationOut
             break;
           case "transferBack":
-            return "#D62728"
+            return configLayout.color.transferBack
             break;
           case "duplication":
-            return "#9467BD"
+            return configLayout.color.duplication
             break;
           case "speciationLoss":
-            return "#1F77B4"
+            return configLayout.color.speciationLoss
             break;
           case "leaf":
-              return "#FF7F0E";
+            return configLayout.color.leaf
             break;
           case "loss":
-              return "black";
+            return configLayout.color.loss
             break;
           default:
 
         }
       })
+
 
 
     allNodes
@@ -20299,8 +20342,34 @@ function generateSVG(svg,cladeRoot) {
         if (d.data.lastEvent.destinationSpecies) {
           name += " ( -> " + d.data.lastEvent.destinationSpecies + ")";
         }
+
         return name;
       });
+
+      function getMethods(obj) {
+          var result = [];
+          for (var id in obj) {
+            try {
+              if (typeof(obj[id]) == "function") {
+                result.push(id + ": " + obj[id].toString());
+              }
+            } catch (err) {
+              result.push(id + ": inaccessible");
+            }
+          }
+          return result;
+        }
+
+        svg
+        .append("rect")
+
+
+        // var test = allNodes
+        //   .select(".label");
+        // console.log(test)
+
+      // console.log(document.getElementsByClassName ('label')[0].getBoundingClientRect());
+
   };
 
 }
