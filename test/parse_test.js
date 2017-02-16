@@ -1,7 +1,8 @@
-var parse = require('../src/parse.js');
-var flatTree = require('../src/flatTree.js');
-var generateSVG = require('../src/generateSvg.js');
-var reconcile = require('../src/reconcile.js');
+// var parse = require('../src/parse.js');
+// var flatTree = require('../src/flatTree.js');
+// var generateSVG = require('../src/generateSvg.js');
+// var reconcile = require('../src/reconcile.js');
+var rpXML = require('../index.js');
 var d3 = require('d3');
 
 
@@ -40,24 +41,24 @@ var flatTreeConfig = {
 //   }
 // }
 
-parse.parse(xmlStrRecPhylo, function (err,recTree) {
+rpXML.parse.parse(xmlStrRecPhylo, function (err,recTree) {
   document = domv.createHtmlDomDocument();
   assert(recTree.recPhylo.recGeneTree[0].phylogeny);
   var cladeRootGt = recTree.recPhylo.recGeneTree[0].phylogeny.clade;
-  cladeRootGt = flatTree.flatTree(cladeRootGt,flatTreeConfig);
+  cladeRootGt = rpXML.flatTree.flatTree(cladeRootGt,flatTreeConfig);
 
 
   if(recTree.recPhylo.spTree)
   {
     var cladeRootSt = recTree.recPhylo.spTree.phylogeny.clade;
-    reconcile.reconcile(cladeRootGt,cladeRootSt);
+    rpXML.reconcile.reconcile(cladeRootGt,cladeRootSt);
   }
 
 
   var svg = d3.select(document.body).append("svg").attr("id","visuRecPhylo");
 
 
-  generateSVG.generateSVG(svg,cladeRootGt);
+  rpXML.generateSVG.generateSVG(svg,cladeRootGt);
 
 
   var svgtextout = "";
