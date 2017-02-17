@@ -11,7 +11,7 @@ var d3hierarchy = require('d3-hierarchy');
 function populateSpTree (spTree,recTree) {
 
   var speciesNodes = d3hierarchy.hierarchy(spTree,function (n) {
-    if(n.clade){
+    if(n.clade && !n._clade){
       n._clade = n.clade;
     }
     return n._clade;
@@ -109,7 +109,7 @@ function createNewSubTreeWithTwoChildren(nodeName,childName,geneName) {
     return {
       name : nodeName,
       geneNames : [geneName],
-      bifOut : true,
+      dead : true,
       _clade : [
         {
           name: childName,
