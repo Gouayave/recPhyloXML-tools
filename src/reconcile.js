@@ -3,7 +3,10 @@ exports.reconcile = reconcile;
 
 var d3hierarchy = require('d3-hierarchy');
 
+
+//Associate species location to loss node
 function reconcile(rootCladeGenesTree, rootCladeSpeciesTree) {
+
   //Get all loss gene leaf a species location
   var rootNodeGt = d3hierarchy.hierarchy(rootCladeGenesTree,function (d) {
     return d.clade;
@@ -53,6 +56,7 @@ function findCladeInSpeciesTree(speciesLocation, nodesSt) {
 
 //Attribut une 'speciesLocation' au gène Loss
 function giveSpeciesLocationToGeneLoss(cladeGt, cladeSt) {
+
 
   var indexLostCladeGt = cladeGt.clade.findIndex(function (child) {
     return child.eventsRec[0].speciesLocation == "undefined";
