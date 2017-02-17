@@ -93,7 +93,7 @@ function createNewSubTreeWithChild(nodeName,childName,geneName) {
     return {
       name : nodeName,
       geneNames : [geneName],
-      out : true,
+      spOut : true,
       _clade : [
         {
           name: childName,

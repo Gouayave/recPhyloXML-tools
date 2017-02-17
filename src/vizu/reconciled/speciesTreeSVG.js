@@ -20,7 +20,7 @@ var color = d3.scaleOrdinal(d3.schemeCategory20);
 var i = 0;
 var id = 0;
 
-var canalSizeX = 20;
+var canalSize = 20;
 var EventY = 150;
 
 
@@ -52,6 +52,7 @@ function init(cladeRootSt,svg) {
     temp = d.x;
     d.x = d.y + 20;
     d.y = temp;
+    d.data.numberOfStories = Math.floor((Math.random() * 3) + 1);
     d.data.id = id++;
   });
 
@@ -88,7 +89,7 @@ function init(cladeRootSt,svg) {
       return targetClade.dead ? "5" : "0";
     })
     .style("stroke","black")
-    .attr("d", diagonalLinkDown)
+    .attr("d", diagonalLinkDown);
 
 
   glink
@@ -171,91 +172,62 @@ function init(cladeRootSt,svg) {
 
 function diagonalLinkDown(d) {
   var path = d3.path();
+  var targetHasChildren = d.target.children ? true : false;
+  var canalSizeSrc = d.source.data.numberOfStories*canalSize;
+  var canalSizeTar = d.target.data.numberOfStories*canalSize;
 
   if (d.leftLink) {
-    if (d.source.data.spOut) {
-      if (d.target.data.dead) {
-        path.moveTo(d.source.x + canalSizeX, d.source.y - canalSizeX);
-      } else {
-        path.moveTo(d.source.x + canalSizeX, d.source.y + canalSizeX);
-      }
 
+    path.moveTo(d.source.x + canalSizeSrc, d.source.y);
+    path.lineTo(d.source.x + canalSizeSrc, d.target.y + canalSizeTar);
+
+    if (targetHasChildren) {
+      path.lineTo(d.target.x - canalSizeTar, d.target.y + canalSizeTar);
     } else {
-      path.moveTo(d.source.x + canalSizeX, d.source.y);
-    }
-
-    path.lineTo(d.source.x + canalSizeX, d.target.y + canalSizeX);
-
-
-    if (d.target.children) {
-      path.lineTo(d.target.x - canalSizeX, d.target.y + canalSizeX);
-    } else {
-      path.lineTo(d.target.x, d.target.y + canalSizeX);
+      path.lineTo(d.target.x, d.target.y + canalSizeTar);
       path.lineTo(d.target.x, d.target.y);
     }
-  } else {
-    if (d.source.data.spOut) {
-      if (d.target.data.dead) {
-        path.moveTo(d.source.x + canalSizeX, d.source.y + canalSizeX);
-      } else {
-        path.moveTo(d.source.x + canalSizeX, d.source.y - canalSizeX);
-      }
+  } else if (d.rightLink)  {
+    path.moveTo(d.source.x + canalSizeSrc, d.source.y);
 
+    path.lineTo(d.source.x + canalSizeSrc, d.target.y - canalSizeTar);
+
+    if (targetHasChildren) {
+      path.lineTo(d.target.x - canalSizeTar, d.target.y - canalSizeTar);
     } else {
-      path.moveTo(d.source.x + canalSizeX, d.source.y);
-    }
-
-    path.lineTo(d.source.x + canalSizeX, d.target.y - canalSizeX);
-
-    if (d.target.children) {
-      path.lineTo(d.target.x - canalSizeX, d.target.y - canalSizeX);
-    } else {
-      path.lineTo(d.target.x, d.target.y - canalSizeX);
+      path.lineTo(d.target.x, d.target.y - canalSizeTar);
       path.lineTo(d.target.x, d.target.y);
     }
   }
   return path.toString();
 }
 
-function diagonalLinkUp(d) {
+function diagonalLinkUp(d,numberOfStories) {
+
   var path = d3.path();
+  var targetHasChildren = d.target.children ? true : false;
+  var canalSizeSrc = d.source.data.numberOfStories*canalSize;
+  var canalSizeTar = d.target.data.numberOfStories*canalSize;
 
   if (d.leftLink) {
-    if (d.source.data.spOut) {
-      if (d.target.data.dead) {
-        path.moveTo(d.source.x - canalSizeX, d.source.y - canalSizeX);
-      } else {
-        path.moveTo(d.source.x - canalSizeX, d.source.y - canalSizeX);
-      }
-    } else {
-      path.moveTo(d.source.x - canalSizeX, d.source.y - canalSizeX);
-    }
 
-    path.lineTo(d.source.x - canalSizeX, d.target.y - canalSizeX);
+    path.moveTo(d.source.x - canalSizeSrc, d.source.y - canalSizeSrc);
+    path.lineTo(d.source.x - canalSizeSrc, d.target.y - canalSizeTar);
 
-    if (d.target.children) {
-      path.lineTo(d.target.x - canalSizeX, d.target.y - canalSizeX);
+    if (targetHasChildren) {
+      path.lineTo(d.target.x - canalSizeTar, d.target.y - canalSizeTar);
     } else {
-      path.lineTo(d.target.x, d.target.y - canalSizeX);
+      path.lineTo(d.target.x, d.target.y - canalSizeTar);
       path.lineTo(d.target.x, d.target.y);
     }
-  } else {
-    if (d.source.data.spOut) {
-      if (d.target.data.dead) {
-        path.moveTo(d.source.x - canalSizeX, d.source.y + canalSizeX);
-      } else {
-        path.moveTo(d.source.x - canalSizeX, d.source.y + canalSizeX);
-      }
+  } else if (d.rightLink) {
+    path.moveTo(d.source.x - canalSizeSrc, d.source.y + canalSizeSrc);
+    path.lineTo(d.source.x - canalSizeSrc, d.target.y + canalSizeTar);
 
+    if (targetHasChildren) {
+      path.lineTo(d.target.x - canalSizeTar, d.target.y + canalSizeTar);
     } else {
-      path.moveTo(d.source.x - canalSizeX, d.source.y + canalSizeX);
-    }
-    path.lineTo(d.source.x - canalSizeX, d.target.y + canalSizeX);
-
-    if (d.target.children) {
-      path.lineTo(d.target.x - canalSizeX, d.target.y + canalSizeX);
-    } else {
-      path.lineTo(d.target.x, d.target.y + canalSizeX);
+      path.lineTo(d.target.x, d.target.y + canalSizeTar);
       path.lineTo(d.target.x, d.target.y);
     }
   }
@@ -278,7 +250,7 @@ function diagonal(d) {
 //   var dendrogramSpTree =
 //     d3
 //     .dendrogramSpTree()
-//     .size([canalSizeX, EventY]);
+//     .size([canalSize, EventY]);
 //
 //   dendrogramSpTree(rootp);
 //
