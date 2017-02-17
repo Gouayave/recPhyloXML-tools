@@ -41,24 +41,24 @@ var flatTreeConfig = {
 //   }
 // }
 
-rpXML.parse.parse(xmlStrRecPhylo, function (err,recTree) {
+rpXML.parse(xmlStrRecPhylo, function (err,recTree) {
   document = domv.createHtmlDomDocument();
   assert(recTree.recPhylo.recGeneTree[0].phylogeny);
   var cladeRootGt = recTree.recPhylo.recGeneTree[0].phylogeny.clade;
-  cladeRootGt = rpXML.flatTree.flatTree(cladeRootGt,flatTreeConfig);
+  cladeRootGt = rpXML.flatTree(cladeRootGt,flatTreeConfig);
 
 
   if(recTree.recPhylo.spTree)
   {
     var cladeRootSt = recTree.recPhylo.spTree.phylogeny.clade;
-    rpXML.reconcile.reconcile(cladeRootGt,cladeRootSt);
+    rpXML.reconcile(cladeRootGt,cladeRootSt);
   }
 
 
   var svg = d3.select(document.body).append("svg").attr("id","visuRecPhylo");
 
 
-  rpXML.generateSVG.generateSVG(svg,cladeRootGt);
+  rpXML.generateSVG(svg,cladeRootGt);
 
 
   var svgtextout = "";
