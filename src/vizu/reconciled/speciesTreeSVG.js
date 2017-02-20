@@ -21,8 +21,25 @@ var i = 0;
 var id = 0;
 
 var canalSize = 20;
-var EventY = 150;
+var depth = 150;
 
+
+function inOrderTraversal(node,callback) {
+  // Check if the current node is empty / null
+  if(node.children)
+  {
+    // Traverse the left subtree by recursively calling the in-order function.
+    inOrderTraversal(node.children[0],callback);
+    // Display the data part of the root (or current node).
+    callback(node);
+    // Traverse the right subtree by recursively calling the in-order function.
+    inOrderTraversal(node.children[1],callback);
+  }
+  else {
+    callback(node);
+  }
+
+};
 
 
 
@@ -39,22 +56,39 @@ function init(cladeRootSt,svg) {
   });
 
 
-
-  var dendrogramSpTree =
-    d3
-    .cluster()
-    .size([1500, 1000]);
-
-  dendrogramSpTree(rootp);
-
   rootp.each(function(d) {
-    var temp;
-    temp = d.x;
-    d.x = d.y + 20;
-    d.y = temp;
     d.data.numberOfStories = Math.floor((Math.random() * 3) + 1);
     d.data.id = id++;
   });
+
+  var posY = 0;
+  inOrderTraversal(rootp,function (d) {
+    var ctnSize = d.data.numberOfStories * canalSize ;
+    posY += ctnSize;
+    d.y = posY;
+    posY += ctnSize;
+  });
+
+  var maxXLeave = 0;
+
+  rootp.each(function (d) {
+    var posX = 0;
+    var ctnSize = d.data.numberOfStories * canalSize ;
+    posX = d.depth *depth;
+    posX += ctnSize;
+    d.x = posX;
+    posX += ctnSize;
+
+    if(maxXLeave < d.x){
+        maxXLeave = d.x;
+    }
+  });
+
+  for (leave of rootp.leaves()) {
+    leave.x = maxXLeave;
+  }
+
+
 
 
 
@@ -68,6 +102,42 @@ function init(cladeRootSt,svg) {
     }
   });
 
+
+  var pointsData = [];
+  rootp.each(function (d) {
+    var canalSizeSrc = (d.data.numberOfStories )*canalSize;
+
+    var upX = d.x + canalSizeSrc;
+    var downX = d.x - canalSizeSrc;
+    var upY = d.y + canalSizeSrc;
+    var downY = d.y - canalSizeSrc;
+
+    var diffX = (upX - downX) / (d.data.numberOfStories +1 );
+    var diffY = (upY - downY) / (d.data.numberOfStories +1 );;
+
+    for (var i = 1; i < (d.data.numberOfStories + 1) ; i++) {
+      if(d.children){
+        pointsData.push([downX + diffX*i,downY+ diffY*i]);
+      }
+      else{
+        pointsData.push([d.x ,downY+ diffY*i]);
+      }
+    }
+  });
+
+  var points =
+    svg.selectAll(".circle")
+    .data(pointsData)
+    .enter();
+
+  points.append("circle")
+  .attr("cx",function (d) {
+      return d[0];
+  })
+  .attr("cy",function (d) {
+      return d[1];
+  })
+  .attr("r",5)
 
 
   var link =
@@ -104,11 +174,6 @@ function init(cladeRootSt,svg) {
     .style("stroke","black")
     .attr("d", diagonalLinkUp);
 
-  // glink
-  //   .append("path")
-  //   .attr("class", "link")
-  //   .attr("d", diagonal);
-
 
   glink.filter(function(d) {
       return  d.target.data.dead;
@@ -123,7 +188,7 @@ function init(cladeRootSt,svg) {
       return "node" + (d.children ? " node--internal" : " node--leaf");
     })
     .attr("transform", function(d) {
-      return "translate(" + d.x + "," + d.y + ")";
+      return "translate(" + d.x + "," + d.y + ")" ;
     })
 
 
@@ -156,7 +221,7 @@ function init(cladeRootSt,svg) {
     .text(function(d) {
       var dead = d.data.dead ;
       // console.log(d.data.dead,d.data.)
-      return dead ? ""  : "(" + d.data.name +")" ;
+      return dead ? ""  : "(" + d.data.name +")" + d.data.numberOfStories;
     })
     // .attr("fill", function(d, i) {
     //   return color(d.data.id);
