@@ -10,6 +10,7 @@ var d3hierarchy = require('d3-hierarchy');
 
 function populateSpTree (spTree,recTree) {
 
+  console.error(JSON.stringify(recTree,null,1));
   var speciesNodes = d3hierarchy.hierarchy(spTree,function (n) {
     if(n.clade && !n._clade){
       n._clade = n.clade;
@@ -35,7 +36,20 @@ function populateSpTree (spTree,recTree) {
     addDeadSpeciesInSpeciesTree(speciesNode,specOutNode);
   }
 
-  // console.log(JSON.stringify(spTree,null,1));
+  // genesNodes.each(function (gn) {
+  //   var speci
+  //   gn.data.speciesClade = getSpeciesClade(gn.data.eventsRec[0].speciesLocation,allSpecies);
+  //   var name = "null"
+  //   if(gn.data.speciesClade)
+  //   {
+  //     name = gn.data.speciesClade.data.name;
+  //   }
+  //   console.error(gn.data.name,name)
+  // });
+
+
+
+  //console.error(JSON.stringify(recTree,null,1));
   //ON a mtn l'arbre des espèces avec les espèces mortes
 
 
