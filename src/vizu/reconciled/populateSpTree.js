@@ -2,6 +2,8 @@ var exports = module.exports = {};
 exports.populateSpTree = populateSpTree;
 
 var d3hierarchy = require('d3-hierarchy');
+var position = require('./position.js');
+
 
 //Le but de cette fonction est d'ajouter des éléments à l'arbres de especes:
 // - Les espèces mortes qui sont dans l'arbre de gène
@@ -10,15 +12,23 @@ var d3hierarchy = require('d3-hierarchy');
 
 function populateSpTree (spTree,recTree) {
 
-  console.error(JSON.stringify(recTree,null,1));
+  //console.error(JSON.stringify(recTree,null,1));
   var speciesNodes = d3hierarchy.hierarchy(spTree,function (n) {
-    if(n.clade && !n._clade){
-      n._clade = n.clade;
-    }
-    return n._clade;
+
+    return n.clade;
+    // if(n.clade && !n._clade){
+    //   n._clade = n.clade;
+    // }
+    // return n._clade;
   });
 
   var allSpecies = speciesNodes.descendants();
+
+  speciesNodes.each(function (n) {
+    n.data.numberOfEvents = n.data.numberOfEvents || 0;
+    n.data.numberOfCanaux = n.data.numberOfCanaux || 0;
+    n.data.numberOfStoriesOut = n.data.numberOfStoriesOut || 0;
+  })
 
   var genesNodes = d3hierarchy.hierarchy(recTree,function (n) {
     return n.clade;
@@ -35,6 +45,11 @@ function populateSpTree (spTree,recTree) {
     var speciesNode = getSpeciesClade(specOutNode.data.eventsRec[0].speciesLocation,allSpecies);
     addDeadSpeciesInSpeciesTree(speciesNode,specOutNode);
   }
+
+
+  var firstSp = getSpeciesClade(recTree.eventsRec[0].speciesLocation,allSpecies);
+  //Assigne les positions abstraites au noeuds
+  position.getAbstractPosition(firstSp.data,recTree);
 
   // genesNodes.each(function (gn) {
   //   var speci
@@ -67,6 +82,7 @@ function getSpeciesClade(spLocation,allSpecies) {
 
 // Modification de l'abre des especes
 function addDeadSpeciesInSpeciesTree(speciesNode,specOutNode) {
+
 
   var nameSpecies = speciesNode.data.name;
   var geneName = specOutNode.data.name;

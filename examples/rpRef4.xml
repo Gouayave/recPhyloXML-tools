@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--                                                               -->
+<!--  Example of recPhylo file                                       -->
+<!--                                                               -->
+<!--  Last modified: 18/11/2015 by Guillaume GENCE                 -->
+<recPhylo  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="http://phylariane.univ-lyon1.fr/recphyloxml"
+ xsi:schemaLocation="./recPhyloXML.xsd">
+  <spTree>
+    <phylogeny>
+      <clade>
+        <name>A</name>
+        <clade>
+          <name>B</name>
+          <clade>
+            <name>F</name>
+            <clade>
+              <name>G</name>
+            </clade>
+            <clade>
+              <name>H</name>
+            </clade>
+          </clade>
+          <clade>
+            <name>D</name>
+          </clade>
+        </clade>
+        <clade>
+          <name>E</name>
+        </clade>
+      </clade>
+    </phylogeny>
+  </spTree>
+  <recGeneTree>
+    <phylogeny rooted="true">
+      <clade>
+        <name>1</name>
+        <eventsRec>
+          <speciationLoss speciesLocation="A"></speciationLoss>
+          <duplication speciesLocation="E"></duplication>
+        </eventsRec>
+        <clade>
+          <name>2</name>
+          <eventsRec>
+            <duplication speciesLocation="E"></duplication>
+          </eventsRec>
+          <clade>
+            <name>3</name>
+            <eventsRec>
+              <duplication speciesLocation="E"></duplication>
+            </eventsRec>
+            <clade>
+              <name>4</name>
+              <eventsRec>
+                <leaf speciesLocation="E"></leaf>
+              </eventsRec>
+            </clade>
+            <clade>
+              <name>5</name>
+              <eventsRec>
+                <leaf speciesLocation="E"></leaf>
+              </eventsRec>
+            </clade>
+
+          </clade>
+          <clade>
+            <name>6</name>
+            <eventsRec>
+              <leaf speciesLocation="E"></leaf>
+            </eventsRec>
+          </clade>
+        </clade>
+        <clade>
+          <name>7</name>
+          <eventsRec>
+            <leaf speciesLocation="E"></leaf>
+          </eventsRec>
+        </clade>
+      </clade>
+    </phylogeny>
+  </recGeneTree>
+  <recGeneTree>
+    <phylogeny rooted="true">
+      <clade>
+        <name>1</name>
+        <eventsRec>
+          <speciationLoss speciesLocation="A"></speciationLoss>
+          <duplication speciesLocation="E"></duplication>
+        </eventsRec>
+        <clade>
+          <name>2</name>
+          <eventsRec>
+            <duplication speciesLocation="E"></duplication>
+          </eventsRec>
+          <clade>
+            <name>3</name>
+            <eventsRec>
+              <leaf speciesLocation="E"></leaf>
+            </eventsRec>
+          </clade>
+          <clade>
+            <name>4</name>
+            <eventsRec>
+              <leaf speciesLocation="E"></leaf>
+            </eventsRec>
+          </clade>
+        </clade>
+        <clade>
+          <name>5</name>
+          <eventsRec>
+            <leaf speciesLocation="E"></leaf>
+          </eventsRec>
+        </clade>
+      </clade>
+    </phylogeny>
+  </recGeneTree>
+</recPhylo>
